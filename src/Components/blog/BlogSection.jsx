@@ -21,32 +21,63 @@ const BlogSection = () => {
   
   const { setBlogDetails } = useContext(BlogDetailsContext);
 
+  // useEffect(() => {
+  //   const fetchBlogs = async () => {
+  //     try {
+  //       setLoading(true);
+  //       // const response = await getBlogDetails();
+  //       const response = await fetch('http://localhost:5000/api/v1/blog')
+  //       const result = await response.json()
+  //       console.log("Blog data",result)
+  //       const simplifiedBlogs = response.data.blogData.map(blog => ({
+  //         id: blog._id,              
+  //         title: blog.title,         
+  //         content: blog.content,      
+  //         image: blog.cover_image,    
+  //         date: new Date(blog.createdAt).toLocaleDateString() 
+  //       }));
+  //       setBlogs(simplifiedBlogs);
+  //     } catch (error) {
+  //       console.error("Error loading blogs:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchBlogs();
+  // },[]);
+
+
   useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        setLoading(true);
-        // const response = await getBlogDetails();
-        const response = await fetch('http://localhost:5000/api/v1/blog')
-        const result = await response.json()
-        console.log("Blog data",result)
-        const simplifiedBlogs = response.data.blogData.map(blog => ({
-          id: blog._id,              
-          title: blog.title,         
-          content: blog.content,      
-          image: blog.cover_image,    
-          date: new Date(blog.createdAt).toLocaleDateString() 
+  const fetchBlogs = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch('http://localhost:5000/api/v1/blog');
+      const result = await response.json();
+      console.log("Blog data", result);
+
+      if (result.success && result.blogData) {
+        const simplifiedBlogs = result.blogData.map(blog => ({
+          id: blog._id,
+          title: blog.title,
+          content: blog.content,
+          image: blog.cover_image,
+          date: new Date(blog.createdAt).toLocaleDateString()
         }));
         setBlogs(simplifiedBlogs);
-      } catch (error) {
-        console.error("Error loading blogs:", error);
-      } finally {
-        setLoading(false);
+      } else {
+        setBlogs([]);
       }
-    };
+    } catch (error) {
+      console.error("Error loading blogs:", error);
+      setBlogs([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchBlogs();
-  },[]);
-
+  fetchBlogs();
+}, []);
   const handleBlogClick = (blog) => {
     setBlogDetails(blog);
     navigate(`/blog/${blog.id}`);
