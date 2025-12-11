@@ -5,12 +5,10 @@ const WhyBookAdmireHolidays = () => {
     <section className="min-h-screen flex flex-col md:flex-row items-center justify-center px-6 md:px-20 py-16 gap-12 text-gray-900">
       <div className="flex-1 max-w-lg">
         <h1 className="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
-          Why <span className="underline decoration-yellow-600 decoration-4">Book</span> <br />
-          <span className="text-yellow-600">Admire Holidays?</span> <br /> 
-          <span className="text-4xl"></span>
+          Why Choose <span className="text-yellow-600">Admire Holidays</span>
         </h1>
         <p className="text-lg md:text-xl font-semibold max-w-md">
-          Your perfect travel starts here — exclusive deals, nonstop support, and seamless booking.
+          Why We Are Your Travel Fam
         </p>
       </div>
       

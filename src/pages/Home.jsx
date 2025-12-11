@@ -239,6 +239,9 @@ import { Link } from "react-router-dom";
 import EnquiryForm from "../forms/EnquiryForm";
 import TestimonialSlider from "../Components/TestimonialSlider";
 import ChatWidget from "../Components/ChatBot/ChatWidget";
+import WhyChoose from "../Components/WhyChoose"
+import TopSelling from "../Components/TopSelling";
+import SpecialHoneymoon from "../Components/SpecialHoneymoon"; 
 
 const Home = () => {
   return (
@@ -254,6 +257,9 @@ const Home = () => {
         title="Exclusive Tour Packages"
         description="Curated packages designed to suit every traveler's needs"
       />  
+      <WhyChoose/>
+      <TopSelling/>
+
 
       <TrendingDestinations />
 
@@ -261,9 +267,10 @@ const Home = () => {
         title="Weekend Trending Packages"
         description="Perfect quick escapes for your busy schedule"
         customClass="bg-blue-50"
-      />
+        />
 
       <InternationalDestinations />
+      <SpecialHoneymoon/>
 {/* 
       <ExclusivePackages
         title="International Holiday Packages"
@@ -271,6 +278,7 @@ const Home = () => {
       /> */}
 
       <StatsAndPartners />
+     
       <DomesticPackage />
       <WeekendGatewayDestinations />
       <ResortsSlider />

@@ -18,7 +18,7 @@
     "axios": "^1.10.0",
     "bootstrap": "^5.3.7",
     "formik": "^2.4.6",
-    "framer-motion": "^12.23.0",
+    "framer-motion": "^12.23.25",
     "gsap": "^3.13.0",
     "install": "^0.13.0",
     "keen-slider": "^6.8.6",
