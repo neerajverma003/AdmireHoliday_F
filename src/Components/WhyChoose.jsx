@@ -75,8 +75,8 @@
 
 import React from "react";
 import Whychosse1 from "../assets/Whychosse1.png";
-import Whychoose2 from "../assets/Whychoose2.png";
-import Whychoose3 from "../assets/Whychoose3.png";
+import Whychoose2 from "../assets/whychoose2.png";
+import Whychoose3 from "../assets/whychoose3.png";
 import Whychoose4 from "../assets/Whychoose4.png";
 
 const features = [
