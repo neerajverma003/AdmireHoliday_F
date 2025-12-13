@@ -423,7 +423,7 @@ const Hero = () => {
       </div>
 
       {/* ✅ DESTINATION CARDS */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 w-full px-6">
+      {/* <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 w-full px-6">
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
           {[
             { title: "Dubai", img: "/images/dubai.jpg" },
@@ -448,7 +448,7 @@ const Hero = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {/* ✅ SEARCH POPUP WITH PROFESSIONAL ANIMATION */}
       <AnimatePresence>

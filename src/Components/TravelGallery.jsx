@@ -101,7 +101,7 @@ const TravelGallery = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Header */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-20">
+      {/* <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-20">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative max-w-6xl mx-auto px-6 text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
@@ -112,7 +112,7 @@ const TravelGallery = () => {
           </p>
           <div className="w-24 h-1 bg-white/50 mx-auto rounded-full"></div>
         </div>
-      </div>
+      </div> */}
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-16">
@@ -237,6 +237,7 @@ const TravelGallery = () => {
       )}
     </div>
   );
+  
 };
 
 export default TravelGallery;

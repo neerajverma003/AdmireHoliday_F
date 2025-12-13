@@ -5,15 +5,25 @@ import ContactUs from '../Components/contact/ContactUs'
 import SubscribeUs from '../forms/SubscribeUs'
 import StatsAndPartners from '../Components/StatsAndPartners'
 import ContactHero from '../Components/contact/ContactHero'
- 
+ import WhyChooseUs from '../Components/WhyChoose'
+ import TestimonialSlider from "../Components/TestimonialSlider"
+ import TravelGallery from '../Components/TravelGallery'
+ import ContactBanner from '../Components/ContactBanner';
+
 const Contact = () => {
   return (
     <div>
         <NavBar/>
         <ContactHero/>
+        {/* <SubscribeUs/> */}
         <ContactUs/>
+        <WhyChooseUs/>
+       
+       
         <StatsAndPartners/>
-        <SubscribeUs/>
+         <TravelGallery/>
+         <ContactBanner/>
+         <TestimonialSlider />
         <Footer/>
     </div>
   )
