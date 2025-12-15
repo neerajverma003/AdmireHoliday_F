@@ -199,7 +199,8 @@ const ExclusivePackages = ({ title, description, customClass = "" }) => {
               : "On Request",
           location: pkg.days_information?.[0]?.locationDetail || "Unknown Location",
           image:
-            pkg.destination_thumbnails?.[0] ||
+            (Array.isArray(pkg.destination_thumbnails) && pkg.destination_thumbnails.length > 0 && pkg.destination_thumbnails[0]) ||
+            (Array.isArray(pkg.destination_images) && pkg.destination_images.length > 0 && pkg.destination_images[0]) ||
             pkg.destination_video ||
             "/images/default-package.jpg",
           link: `/itineraries/${pkg._id}`,
