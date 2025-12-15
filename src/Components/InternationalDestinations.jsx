@@ -158,7 +158,7 @@ const InternationalPackage = () => {
   }
 
   return (
-    <section className="py-24 bg-white overflow-hidden">
+    <section className="py-4 bg-white overflow-hidden">
       {/*  HEADER */}
       <div className="text-center mb-20">
         <p className="text-orange-500 font-semibold mb-2">
@@ -200,7 +200,7 @@ const InternationalPackage = () => {
                     <img
                       src={image}
                       alt={card.destination_name}
-                      className="w-full h-[420px] object-cover"
+                      className="w-full h-[430px] object-cover    "
                       loading="eager"
                       decoding="async"
                       style={{ pointerEvents: 'none' }}
