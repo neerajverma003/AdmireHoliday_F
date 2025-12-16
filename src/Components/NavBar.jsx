@@ -69,48 +69,9 @@
 //       document.body.style.overflow = 'hidden';
 //     } else {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
 //       document.body.style.overflow = 'unset';
 //     }
-   
+
 //     return () => {
 //       document.body.style.overflow = 'unset';
 //     };
@@ -185,7 +146,7 @@
 
 //             {/* Social Media Links */}
 //             <div className="flex gap-2 mt-3">
-//               <button 
+//               <button
 //                 onClick={() => {
 //                   window.open('https://www.facebook.com/people/Admire-Holidays/100090809996697/?mibextid=ZbWKwL', '_blank');
 //                   navigate('/social-click');
@@ -195,8 +156,8 @@
 //               >
 //                 <FaFacebook />
 //               </button>
-              
-//               <button 
+
+//               <button
 //                 onClick={() => {
 //                   window.open('https://twitter.com/admireholidays', '_blank');
 //                   navigate('/social-click');
@@ -206,8 +167,8 @@
 //               >
 //                 <FaTwitter />
 //               </button>
-              
-//               <button 
+
+//               <button
 //                 onClick={() => {
 //                   window.open('https://www.instagram.com/admireholidays_official?igsh=MWVydXI0ejY5OW9hdQ%3D%3D', '_blank');
 //                   navigate('/social-click');
@@ -217,8 +178,8 @@
 //               >
 //                 <FaInstagram />
 //               </button>
-              
-//               <button 
+
+//               <button
 //                 onClick={() => {
 //                   window.open('https://www.youtube.com/@AdmireHolidays_official', '_blank');
 //                   navigate('/social-click');
@@ -228,8 +189,8 @@
 //               >
 //                 <FaYoutube />
 //               </button>
-              
-//               <button 
+
+//               <button
 //                 onClick={() => {
 //                   window.open('https://www.linkedin.com/company/103593428/admin/dashboard/', '_blank');
 //                   navigate('/social-click');
@@ -312,9 +273,9 @@
 //                     </li>
 //                   );
 //                 })}
-                
+
 //                 {/* Category Dropdown */}
-//                 <li 
+//                 <li
 //                   className="relative"
 //                   ref={categoryDropdownRef}
 //                   onMouseEnter={() => !isMobile && setCategoryDropdownOpen(true)}
@@ -332,13 +293,13 @@
 //                       className="ml-1 text-xs"
 //                     />
 //                   </button>
-                  
+
 //                   {categoryDropdownOpen && (
 //                     <div className="absolute left-0 mt-0 w-56 bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden z-[55]">
 //                       <div className="px-4 py-2 bg-blue-800 text-white">
 //                         <p className="text-sm font-medium">Holidays by Interest</p>
 //                       </div>
-                      
+
 //                       <div className="max-h-96 overflow-y-auto">
 //                         {categories.map((category) => (
 //                           <NavLink
@@ -371,14 +332,14 @@
 //                     className="text-gray-500 text-xs transition-transform"
 //                   />
 //                 </button>
-               
+
 //                 {authDropdownOpen && (
 //                   <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden z-[55]">
 //                     <div className="px-4 py-3 border-b border-gray-100 bg-blue-50">
 //                       <p className="text-sm font-medium text-gray-600">Welcome to Admire</p>
 //                       <p className="text-xs text-gray-500">Sign in or create account</p>
 //                     </div>
-                   
+
 //                     <NavLink
 //                       to="/signin"
 //                       className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 transition-colors"
@@ -390,7 +351,7 @@
 //                         <p className="text-xs text-gray-500">Access your account</p>
 //                       </div>
 //                     </NavLink>
-                   
+
 //                     <div className="px-4 py-2 border-t border-gray-100 bg-gray-50">
 //                       <NavLink
 //                         to="/my-profile"
@@ -460,7 +421,7 @@
 //                       </NavLink>
 //                     </li>
 //                   ))}
-                  
+
 //                   {/* Mobile Category Dropdown */}
 //                   <li>
 //                     <button
@@ -477,13 +438,13 @@
 //                         className="ml-1 text-xs"
 //                       />
 //                     </button>
-                    
+
 //                     {categoryDropdownOpen && (
 //                       <div className="mt-1 ml-4 bg-gray-50 rounded-lg overflow-hidden">
 //                         <div className="px-3 py-2 bg-blue-800 text-white">
 //                           <p className="text-sm font-medium">Holidays by Interest</p>
 //                         </div>
-                        
+
 //                         <ul className="max-h-60 overflow-y-auto">
 //                           {categories.map((category) => (
 //                             <li key={category.path}>
@@ -520,7 +481,7 @@
 //                         <p className="text-xs text-gray-500">Access your account</p>
 //                       </div>
 //                     </NavLink>
-                   
+
 //                     <NavLink
 //                       to="/my-profile"
 //                       className="flex items-center px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-800 transition-colors rounded-lg"
@@ -553,7 +514,6 @@
 // }
 
 // export default NavBar;
-
 
 // import React, { useState, useEffect } from "react";
 // import { NavLink, useLocation } from "react-router-dom";
@@ -722,7 +682,6 @@
 
 // export default NavBar;
 
-
 // import React, { useState, useEffect, useRef } from "react";
 // import { NavLink, useLocation } from "react-router-dom";
 // import logo from "../assets/images/admire-logo.webp";
@@ -865,32 +824,322 @@
 
 // export default NavBar;
 
+// import React, { useState, useEffect, useRef } from "react";
+// import { NavLink, useLocation } from "react-router-dom";
+// import logo from "../assets/images/admire-logo.webp";
+
+// const NavBar = () => {
+//   const [scrolled, setScrolled] = useState(false);
+//   const [categoryOpen, setCategoryOpen] = useState(false);
+//   const categoryRef = useRef(null);
+//   const location = useLocation();
+
+//   // Scroll animation
+//   useEffect(() => {
+//     const onScroll = () => {
+//       setScrolled(window.scrollY > 20);
+//     };
+//     window.addEventListener("scroll", onScroll);
+//     return () => window.removeEventListener("scroll", onScroll);
+//   }, []);
+
+//   // Close dropdown on route change
+//   useEffect(() => {
+//     setCategoryOpen(false);
+//   }, [location.pathname]);
+
+//   // Outside click
+//   useEffect(() => {
+//     const handler = (e) => {
+//       if (categoryRef.current && !categoryRef.current.contains(e.target)) {
+//         setCategoryOpen(false);
+//       }
+//     };
+//     document.addEventListener("mousedown", handler);
+//     return () => document.removeEventListener("mousedown", handler);
+//   }, []);
+
+//   const categories = [
+//     "Wildlife",
+//     "Adventure",
+//     "Honeymoon",
+//     "Beach",
+//     "Pilgrimage",
+//     "Hill Station",
+//     "Heritage Tours",
+//     "Ayurveda Tours",
+//     "Cultural",
+//     "Family",
+//     "Bachelors",
+//     "Women Group",
+//     "Special Interest",
+//   ];
+
+//   return (
+//     <nav
+//       style={{ fontFamily: "Arial, sans-serif" }}
+//       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500
+//         ${
+//           scrolled
+//             ? "bg-[#2b2b2b]/90 backdrop-blur-md shadow-lg"
+//             : "bg-gradient-to-r from-[#1c1c1c]/60 via-[#3b2f2f]/60 to-[#c68642]/60"
+//         }`}
+//     >
+//       <div className="max-w-[1400px] mx-auto px-6">
+//         <div className="h-[72px] flex items-center justify-between">
+
+//           {/* LOGO */}
+//           <NavLink to="/" className="flex items-center">
+//             <img src={logo} alt="Admire" className="h-9 object-contain" />
+//           </NavLink>
+
+//           {/* CENTER MENU */}
+//           <ul className="hidden md:flex items-center gap-8 text-sm text-white">
+//             {[
+//               { name: "Home", path: "/" },
+//               { name: "Domestic", path: "/domestic" },
+//               { name: "International", path: "/international" },
+//               { name: "Category", path: "#" },
+//               { name: "Blogs", path: "/blogs" },
+//               { name: "About Us", path: "/about" },
+//               { name: "Contact us", path: "/contact" },
+//             ].map((item) => (
+//               <li key={item.name} className="relative">
+//                 {item.name === "Category" ? (
+//                   <button
+//                     onClick={() => setCategoryOpen(!categoryOpen)}
+//                     className="hover:text-orange-400 transition"
+//                   >
+//                     Category
+//                   </button>
+//                 ) : (
+//                   <NavLink
+//                     to={item.path}
+//                     end={item.path === "/"}
+//                     className={({ isActive }) =>
+//                       `transition hover:text-orange-400 ${
+//                         isActive ? "text-orange-400" : ""
+//                       }`
+//                     }
+//                   >
+//                     {item.name}
+//                   </NavLink>
+//                 )}
+//               </li>
+//             ))}
+//           </ul>
+
+//           {/* RIGHT */}
+//           <div className="flex items-center gap-4">
+//             <NavLink
+//               to="/login"
+//               className="bg-orange-500 hover:bg-orange-600 transition text-white text-xs px-4 py-2 rounded-full"
+//             >
+//               B2B Login
+//             </NavLink>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* CATEGORY DROPDOWN */}
+//       {categoryOpen && (
+//         <div
+//           ref={categoryRef}
+//           className="absolute left-1/2 -translate-x-1/2 top-[72px]
+//           w-[280px] bg-white rounded-xl shadow-2xl overflow-hidden animate-fadeDown"
+//         >
+//           <div className="bg-blue-700 text-white px-4 py-2 text-sm">
+//             Holidays by Interest
+//           </div>
+//           <div className="max-h-[300px] overflow-y-auto">
+//             {categories.map((cat) => (
+//               <NavLink
+//                 key={cat}
+//                 to={`/category/${cat.toLowerCase().replace(/\s+/g, "-")}`}
+//                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 transition"
+//                 onClick={() => setCategoryOpen(false)}
+//               >
+//                 {cat}
+//               </NavLink>
+//             ))}
+//           </div>
+//         </div>
+//       )}
+//     </nav>
+//   );
+// };
+
+// export default NavBar;
+
+// import React, { useState, useEffect, useRef } from "react";
+// import { NavLink } from "react-router-dom";
+// import logo from "../assets/AdmireLogo.png";
+// // import AdmireLogo from "../assets/images/admire-logo.webp";
+
+// const NavBar = () => {
+//   const [scrolled, setScrolled] = useState(false);
+//   const [categoryOpen, setCategoryOpen] = useState(false);
+//   const categoryRef = useRef(null);
+
+//   useEffect(() => {
+//     const onScroll = () => setScrolled(window.scrollY > 20);
+//     window.addEventListener("scroll", onScroll);
+//     return () => window.removeEventListener("scroll", onScroll);
+//   }, []);
+
+//   useEffect(() => {
+//     const handler = (e) => {
+//       if (categoryRef.current && !categoryRef.current.contains(e.target)) {
+//         setCategoryOpen(false);
+//       }
+//     };
+//     document.addEventListener("mousedown", handler);
+//     return () => document.removeEventListener("mousedown", handler);
+//   }, []);
+
+//   const menuItems = [
+//     { name: "Home", path: "/" },
+//     { name: "Domestic", path: "/domestic" },
+//     { name: "International", path: "/international" },
+//     { name: "Category", path: "#" },
+//     { name: "Blogs", path: "/blog" },
+//     { name: "About Us", path: "/about" },
+//     { name: "Contact us", path: "/contact" },
+//   ];
+
+//   return (
+//     <nav
+//       className={`fixed top-0 left-0 w-full z-[1000] transition-all duration-500 ${
+//         scrolled ? "bg-white/80 backdrop-blur-md shadow-md" : "bg-transparent"
+//       }`}
+//     >
+//       <div className="max-w-[1400px] mx-auto px-6">
+//         <div className="h-[72px] flex items-center justify-between">
+//           {/* LOGO */}
+//           <NavLink to="/">
+//             {/* <img src={logo} alt="Admire" className="h- object-contain" /> */}
+
+//             <img
+//               src={logo}
+//               alt="Admire"
+//               className="h-12 md:h-16 lg:h-20 object-contain"
+//             />
+//           </NavLink>
+
+//           {/* MENU */}
+//           <ul className="hidden md:flex items-center gap-8 text-sm font-medium">
+//             {menuItems.map((item) => (
+//               <li key={item.name} className="relative group">
+//                 {item.name === "Category" ? (
+//                   <button
+//                     onClick={() => setCategoryOpen(!categoryOpen)}
+//                     className={`relative pb-1 ${
+//                       scrolled ? "text-gray-800" : "text-white"
+//                     } hover:text-orange-500`}
+//                   >
+//                     Category
+//                     {/* hover small underline */}
+//                     <span className="absolute left-1/2 -translate-x-1/2 bottom-0 h-[2px] w-0 bg-orange-500 transition-all duration-300 group-hover:w-4"></span>
+//                   </button>
+//                 ) : (
+//                   <NavLink
+//                     to={item.path}
+//                     end={item.path === "/"}
+//                     className={({ isActive }) =>
+//                       `relative pb-1 transition ${
+//                         isActive
+//                           ? "text-orange-500"
+//                           : scrolled
+//                           ? "text-gray-800 hover:text-orange-500"
+//                           : "text-white hover:text-orange-400"
+//                       }`
+//                     }
+//                   >
+//                     {({ isActive }) => (
+//                       <>
+//                         {item.name}
+
+//                         {/* UNDERLINE LOGIC */}
+//                         <span
+//                           className={`absolute bottom-0 left-0 h-[2px] bg-orange-500 transition-all duration-300
+//                           ${
+//                             isActive
+//                               ? "w-full" // ✅ ACTIVE = FULL
+//                               : "w-0 left-1/2 -translate-x-1/2 group-hover:w-4" // ✅ HOVER = SMALL
+//                           }`}
+//                         ></span>
+//                       </>
+//                     )}
+//                   </NavLink>
+//                 )}
+//               </li>
+//             ))}
+//           </ul>
+
+//           {/* RIGHT BUTTON */}
+//           <NavLink
+//             to="/signin"
+//             className="bg-orange-500 hover:bg-orange-600 transition text-white text-xs px-4 py-2 rounded-full shadow"
+//           >
+//             B2B Login
+//           </NavLink>
+//         </div>
+//       </div>
+
+//       {/* CATEGORY DROPDOWN */}
+//       {categoryOpen && (
+//         <div
+//           ref={categoryRef}
+//           className="absolute left-1/2 -translate-x-1/2 top-[72px]
+//           w-[280px] bg-white rounded-xl shadow-2xl overflow-hidden"
+//         >
+//           <div className="bg-orange-500 text-white px-4 py-2 text-sm font-semibold">
+//             Holidays by Interest
+//           </div>
+//           <div className="max-h-[300px] overflow-y-auto">
+//             {["Wildlife", "Adventure", "Honeymoon", "Beach"].map((cat) => (
+//               <NavLink
+//                 key={cat}
+//                 to={`/category/${cat.toLowerCase()}`}
+//                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50"
+//                 onClick={() => setCategoryOpen(false)}
+//               >
+//                 {cat}
+//               </NavLink>
+//             ))}
+//           </div>
+//         </div>
+//       )}
+//     </nav>
+//   );
+// };
+
+// export default NavBar;
+
+
+
+
+
+
+
+
+
 
 import React, { useState, useEffect, useRef } from "react";
-import { NavLink, useLocation } from "react-router-dom";
-import logo from "../assets/images/admire-logo.webp";
+import { NavLink } from "react-router-dom";
+import logo from "../assets/AdmireLogo.png";
 
 const NavBar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [categoryOpen, setCategoryOpen] = useState(false);
   const categoryRef = useRef(null);
-  const location = useLocation();
 
-  // Scroll animation
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close dropdown on route change
-  useEffect(() => {
-    setCategoryOpen(false);
-  }, [location.pathname]);
-
-  // Outside click
   useEffect(() => {
     const handler = (e) => {
       if (categoryRef.current && !categoryRef.current.contains(e.target)) {
@@ -901,85 +1150,96 @@ const NavBar = () => {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  const categories = [
-    "Wildlife",
-    "Adventure",
-    "Honeymoon",
-    "Beach",
-    "Pilgrimage",
-    "Hill Station",
-    "Heritage Tours",
-    "Ayurveda Tours",
-    "Cultural",
-    "Family",
-    "Bachelors",
-    "Women Group",
-    "Special Interest",
+  const menuItems = [
+    { name: "Home", path: "/" },
+    { name: "Domestic", path: "/domestic" },
+    { name: "International", path: "/international" },
+    { name: "Category", path: "#" },
+    { name: "Blogs", path: "/blog" },
+    { name: "About Us", path: "/about" },
+    { name: "Contact Us", path: "/contact" },
   ];
 
   return (
     <nav
-      style={{ fontFamily: "Arial, sans-serif" }}
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500
-        ${
-          scrolled
-            ? "bg-[#2b2b2b]/90 backdrop-blur-md shadow-lg"
-            : "bg-gradient-to-r from-[#1c1c1c]/60 via-[#3b2f2f]/60 to-[#c68642]/60"
-        }`}
+      className={`fixed top-0 left-0 w-full z-[1000] transition-all duration-500 ${
+        scrolled
+          ? "bg-white/80 backdrop-blur-md shadow-md"
+          : "bg-transparent"
+      }`}
     >
       <div className="max-w-[1400px] mx-auto px-6">
-        <div className="h-[72px] flex items-center justify-between">
-
+        {/* 🔑 overflow-visible added */}
+        <div className="h-[72px] flex items-center justify-between overflow-visible">
+          
           {/* LOGO */}
-          <NavLink to="/" className="flex items-center">
-            <img src={logo} alt="Admire" className="h-9 object-contain" />
+          <NavLink to="/" className="flex items-center h-full overflow-visible">
+            <img
+              src={logo}
+              alt="Admire"
+              className="
+                h-14 md:h-16
+                object-contain block
+                scale-150
+                transition-transform duration-300
+              "
+            />
           </NavLink>
 
-          {/* CENTER MENU */}
-          <ul className="hidden md:flex items-center gap-8 text-sm text-white">
-            {[
-              { name: "Home", path: "/" },
-              { name: "Domestic", path: "/domestic" },
-              { name: "International", path: "/international" },
-              { name: "Category", path: "#" },
-              { name: "Blogs", path: "/blogs" },
-              { name: "About Us", path: "/about" },
-              { name: "Contact us", path: "/contact" },
-            ].map((item) => (
-              <li key={item.name} className="relative">
+          {/* MENU */}
+          <ul className="hidden md:flex items-center gap-8 text-sm font-medium">
+            {menuItems.map((item) => (
+              <li key={item.name} className="relative group">
                 {item.name === "Category" ? (
                   <button
                     onClick={() => setCategoryOpen(!categoryOpen)}
-                    className="hover:text-orange-400 transition"
+                    className={`relative pb-1 ${
+                      scrolled ? "text-gray-800" : "text-white"
+                    } hover:text-orange-500`}
                   >
                     Category
+                    <span className="absolute left-1/2 -translate-x-1/2 bottom-0 h-[2px] w-0 bg-orange-500 transition-all duration-300 group-hover:w-4"></span>
                   </button>
                 ) : (
                   <NavLink
                     to={item.path}
                     end={item.path === "/"}
                     className={({ isActive }) =>
-                      `transition hover:text-orange-400 ${
-                        isActive ? "text-orange-400" : ""
+                      `relative pb-1 transition ${
+                        isActive
+                          ? "text-orange-500"
+                          : scrolled
+                          ? "text-gray-800 hover:text-orange-500"
+                          : "text-white hover:text-orange-400"
                       }`
                     }
                   >
-                    {item.name}
+                    {({ isActive }) => (
+                      <>
+                        {item.name}
+                        <span
+                          className={`absolute bottom-0 left-0 h-[2px] bg-orange-500 transition-all duration-300
+                          ${
+                            isActive
+                              ? "w-full"
+                              : "w-0 left-1/2 -translate-x-1/2 group-hover:w-4"
+                          }`}
+                        ></span>
+                      </>
+                    )}
                   </NavLink>
                 )}
               </li>
             ))}
           </ul>
 
-          {/* RIGHT */}
-          <div className="flex items-center gap-4">
-            <NavLink
-              to="/login"
-              className="bg-orange-500 hover:bg-orange-600 transition text-white text-xs px-4 py-2 rounded-full"
-            >
-              B2B Login
-            </NavLink>
-          </div>
+          {/* RIGHT BUTTON */}
+          <NavLink
+            to="/signin"
+            className="bg-orange-500 hover:bg-orange-600 transition text-white text-xs px-4 py-2 rounded-full shadow"
+          >
+            B2B Login
+          </NavLink>
         </div>
       </div>
 
@@ -988,17 +1248,17 @@ const NavBar = () => {
         <div
           ref={categoryRef}
           className="absolute left-1/2 -translate-x-1/2 top-[72px]
-          w-[280px] bg-white rounded-xl shadow-2xl overflow-hidden animate-fadeDown"
+          w-[280px] bg-white rounded-xl shadow-2xl overflow-hidden"
         >
-          <div className="bg-blue-700 text-white px-4 py-2 text-sm">
+          <div className="bg-orange-500 text-white px-4 py-2 text-sm font-semibold">
             Holidays by Interest
           </div>
           <div className="max-h-[300px] overflow-y-auto">
-            {categories.map((cat) => (
+            {["Wildlife", "Adventure", "Honeymoon", "Beach"].map((cat) => (
               <NavLink
                 key={cat}
-                to={`/category/${cat.toLowerCase().replace(/\s+/g, "-")}`}
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 transition"
+                to={`/category/${cat.toLowerCase()}`}
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50"
                 onClick={() => setCategoryOpen(false)}
               >
                 {cat}

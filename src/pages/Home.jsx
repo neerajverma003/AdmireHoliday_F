@@ -218,6 +218,92 @@
 
 // export default Home;
 
+// import React from "react";
+// import NavBar from "../Components/NavBar";
+// import Hero from "../Components/heroSection/Hero";
+// import TrendingDestinations from "../Components/TrendingDestinations";
+// import ExclusivePackages from "../Components/ExclusivePackages";
+// import WeekendTrendingPackages from "../Components/WeekendTrendingPackages";
+// import InternationalDestinations from "../Components/InternationalDestinations";
+// import DomesticPackage from "../Components/DomesticPackage";
+// import Footer from "../Components/Footer";
+// import WeekendGatewayDestinations from "../Components/WeekendGatewayDestinations";
+// import ResortsSlider from "../Components/ResortSlider";
+// import TravelTips from "../Components/TravelTips";
+// import WhyBookAdmireHolidays from "../Components/WhyBookAdmireHolidays";
+// import TravelGallery from "../Components/TravelGallery";
+// import VideoTestimonials from "../Components/VideoTestimonials";
+// import SubscribeUs from "../forms/SubscribeUs";
+// import StatsAndPartners from "../Components/StatsAndPartners";
+// import { Link } from "react-router-dom";
+// import EnquiryForm from "../forms/EnquiryForm";
+// import TestimonialSlider from "../Components/TestimonialSlider";
+// import ChatWidget from "../Components/ChatBot/ChatWidget";
+// import WhyChoose from "../Components/WhyChoose"
+// import TopSelling from "../Components/TopSelling";
+// import SpecialHoneymoon from "../Components/SpecialHoneymoon"; 
+
+// const Home = () => {
+//   return (
+//     <div className="home-page">
+//       <EnquiryForm />
+//       <NavBar />
+//       <Hero
+//         videoSrc="src/assets/videos/Hero-video.mp4"
+//         title="Discover Domestic Destinations"
+//       />
+
+//       <ExclusivePackages
+//         title="Exclusive Tour Packages"
+//         description="Curated packages designed to suit every traveler's needs"
+//       />  
+//       <WhyChoose/>
+//       <TopSelling/>
+
+
+//       <TrendingDestinations />
+
+//       <WeekendTrendingPackages
+//         title="Weekend Trending Packages"
+//         description="Perfect quick escapes for your busy schedule"
+//         customClass="bg-blue-50"
+//         />
+
+//       <InternationalDestinations />
+//       <SpecialHoneymoon/>
+// {/* 
+//       <ExclusivePackages
+//         title="International Holiday Packages"
+//         description="Explore the world with our exclusive deals"
+//       /> */}
+
+//       <StatsAndPartners />
+     
+//       <DomesticPackage />
+//       <WeekendGatewayDestinations />
+//       <ResortsSlider />
+//       <TravelTips />
+//       <WhyBookAdmireHolidays />
+//       <TravelGallery />
+//       <VideoTestimonials />
+//       <TestimonialSlider />
+//       <SubscribeUs />
+//       <Footer />
+
+//       <Link
+//         to="/HomeStickyFormPage"
+//         className="fixed right-0 top-1/2 -translate-y-1/2 bg-red-500 text-white px-1.5 py-2.5 rounded-tl-md rounded-bl-md font-semibold cursor-pointer z-[1000] no-underline shadow-md text-[14px] w-10 text-center [writing-mode:vertical-lr] [text-orientation:mixed] hover:bg-red-600 transition-colors duration-200"
+//         aria-label="Submit suggestions or complaints"
+//       >
+//         Suggestions/Complaints
+//       </Link>
+//     </div>
+//   );
+// };
+
+// export default Home;
+
+
 import React from "react";
 import NavBar from "../Components/NavBar";
 import Hero from "../Components/heroSection/Hero";
@@ -245,7 +331,8 @@ import SpecialHoneymoon from "../Components/SpecialHoneymoon";
 
 const Home = () => {
   return (
-    <div className="home-page">
+    <div className="home-page bg-[#f6f6f6] min-h-screen">
+
       <EnquiryForm />
       <NavBar />
       <Hero

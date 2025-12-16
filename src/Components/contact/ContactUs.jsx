@@ -591,6 +591,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
 import { submitContactForm } from "../../api/api";
+import travelenquiry from '../../assets/travelenquiry.png';
 
 const TravelEnquiryForm = () => {
   const [formData, setFormData] = useState({
@@ -809,7 +810,7 @@ Message: ${formData.message}
           className="flex justify-center items-center"
         >
           <img
-            src="https://i.ibb.co/7z8jvJ9/travel-banner.png"
+            src={travelenquiry}
             alt="travel"
             className="w-full max-w-sm md:max-w-md drop-shadow-xl"
           />

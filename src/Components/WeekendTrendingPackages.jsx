@@ -330,7 +330,7 @@ const WeekendTrendingPackages = ({ title, description, customClass = '' }) => {
             {pkg.duration}
           </div>
         </div>
-        <div className="p-4 md:p-5">
+        <div className="p-4 md:p-5">``
           <h4 className="text-base md:text-lg font-semibold mb-2 text-gray-800 truncate">
             {pkg.title}
           </h4>

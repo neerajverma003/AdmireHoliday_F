@@ -1,0 +1,4 @@
+# admireholidays_frontend
+# VITE_API_URL=https://api.admireholidays.com
+VITE_API_URL_LOCAL=http://localhost:5000
+# VITE_API_URL=http://192.168.1.18:5000
