@@ -193,11 +193,30 @@ import Footer from '../Components/Footer';
 import NavBar from '../Components/NavBar';
 import HeroReusable from '../Components/heroSection/HeroReusable';
 import SubscribeUs from '../forms/SubscribeUs';
+import { getHeroSection } from '../api/api';
  
 const TermsAndConditions = () => {
   const [visibleSections, setVisibleSections] = useState(new Set());
   const [mounted, setMounted] = useState(false);
+  const [videoUrl, setVideoUrl] = useState(null);
+  const [heroLoading, setHeroLoading] = useState(true);
  
+  // Fetch hero video for TermsAndConditions page
+  useEffect(() => {
+    const loadHero = async () => {
+      try {
+        const res = await getHeroSection('terms-and-conditions');
+        setVideoUrl(res?.data?.publicUrl?.[0] || null);
+      } catch (err) {
+        console.error('Failed to load hero video', err);
+        setVideoUrl(null);
+      } finally {
+        setHeroLoading(false);
+      }
+    };
+    loadHero();
+  }, []);
+
   // Handle initial mount to prevent flash of invisible content
   useEffect(() => {
     setMounted(true);
@@ -270,9 +289,12 @@ const TermsAndConditions = () => {
  
     <div>
         <NavBar/>
+        <HeroReusable 
+                heroTitle="Terms and Conditions"
+                heroSubtitle="Know our policies and terms"
+                videoUrl={videoUrl}
+              />
  
- 
-       
     <div className="min-h-screen bg-gray-50 py-12">
       <section
         className={`max-w-5xl mx-auto px-6 py-16 transition-opacity duration-1000 ${

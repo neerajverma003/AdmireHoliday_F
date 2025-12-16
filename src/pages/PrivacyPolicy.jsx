@@ -3,10 +3,29 @@ import Footer from '../Components/Footer';
 import NavBar from '../Components/NavBar';
 import HeroReusable from '../Components/heroSection/HeroReusable';
 import SubscribeUs from '../forms/SubscribeUs';
+import { getHeroSection } from '../api/api';
 
 const PrivacyAndTerms = () => {
   const [visibleSections, setVisibleSections] = useState(new Set());
   const [mounted, setMounted] = useState(false);
+  const [videoUrl, setVideoUrl] = useState(null);
+  const [heroLoading, setHeroLoading] = useState(true);
+
+  // Fetch hero video for PrivacyPolicy page
+  useEffect(() => {
+    const loadHero = async () => {
+      try {
+        const res = await getHeroSection('privacy-policy');
+        setVideoUrl(res?.data?.publicUrl?.[0] || null);
+      } catch (err) {
+        console.error('Failed to load hero video', err);
+        setVideoUrl(null);
+      } finally {
+        setHeroLoading(false);
+      }
+    };
+    loadHero();
+  }, []);
 
   // Handle initial mount to prevent flash of invisible content
   useEffect(() => {
@@ -83,8 +102,9 @@ const PrivacyAndTerms = () => {
 
 
         <HeroReusable 
-                videoSrc="src/assets/videos/Hero-blog.mp4"
-                title="Privacy Policy"
+                heroTitle="Privacy Policy"
+                heroSubtitle="Protecting your privacy is our priority"
+                videoUrl={videoUrl}
               />
     <div className="min-h-screen bg-gray-50 py-12">
       <section 

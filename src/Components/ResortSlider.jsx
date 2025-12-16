@@ -17,7 +17,6 @@ const ResortsSlider = () => {
     try {
       const response = await fetch('http://localhost:5000/resort/all');
       const res = await response.json();
-      // console.log(res);
       setResorts(res);
     } catch (error) {
       console.error("Failed to fetch resorts", error);
@@ -40,8 +39,8 @@ const ResortsSlider = () => {
       animationRef.current.kill();
     }
 
-    // Card width (428) + gap (24) = 452px
-    const cardWidth = 452;
+    // Card width (340) + gap (24) = 364px
+    const cardWidth = 364;
     const totalCards = resorts.length;
     const oneSetWidth = cardWidth * totalCards;
 
@@ -84,7 +83,7 @@ const ResortsSlider = () => {
       animationRef.current.pause();
     }
 
-    const cardWidth = 452;
+    const cardWidth = 364;
     const totalCards = resorts.length;
     const oneSetWidth = cardWidth * totalCards;
 
@@ -122,56 +121,40 @@ const ResortsSlider = () => {
   const renderResortCard = (resort, index) => (
     <div
       key={`${resort._id}-${index}`}
-      className="w-[428px] mx-3 flex-shrink-0"
+      className="w-[340px] mx-3 flex-shrink-0"
     >
       <Link
         className="w-full block h-full group"
         to={`resort-detail/${resort._id}`}
       >
-        <div className="h-[420px] flex flex-col justify-between rounded-lg shadow-lg p-2 relative bg-white transition-all duration-300 hover:scale-[1.02] group-hover:shadow-xl">
-          {/* Discount Badge */}
-          <div className="absolute top-2 left-2 bg-yellow-400 text-black font-bold px-3 py-1 rounded-md text-sm z-10 animate-bounce">
-            Discount: {resort.discount}
+        <div className="flex flex-col rounded-[28px] shadow-[0_4px_20px_rgba(0,0,0,0.08)] relative bg-white transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] overflow-hidden border border-gray-100">
+          {/* Discount Badge - Egg oval shaped badge at top-left corner covering the corner */}
+          <div className="absolute -top-3 -left-3 bg-white text-black px-10 py-4 z-10 shadow-[0_3px_15px_rgba(0,0,0,0.2)] transform -rotate-[18deg]" style={{ backgroundColor: "rgba(255, 255, 255, 0.45)", borderRadius: '1% 55% 52% 48% / 58% 50% 50% 42%' }}>
+            <div className="text-gray-700 text-[11px] font-medium leading-none tracking-wide text-left">Discount</div>
+            <div className="text-black text-[18px] font-bold leading-none mt-2 text-left">
+              {resort.discount}% <span className="text-[13px] font-semibold">Off</span>
+            </div>
           </div>
 
-          {/* Image */}
-          <div className="h-[200px] w-full relative rounded-lg overflow-hidden">
+          {/* Image Container - Large image taking up majority of card */}
+          <div className="h-[240px] w-full relative overflow-hidden rounded-t-[28px]">
             <img
               alt={resort.title}
               loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               src={resort.images && resort.images[0]}
             />
           </div>
 
-          {/* Content */}
-          <div className="p-4 flex flex-col justify-between flex-grow">
-            <div>
-              <h2 className="text-lg font-bold text-gray-800 group-hover:text-indigo-600 transition-colors">
-                {resort.title}
-              </h2>
-              <p className="text-sm text-gray-600 mb-4">
-                Discount: {resort.discount}
-              </p>
-            </div>
+          {/* Content - Centered text and button with white background */}
+          <div className="px-5 py-4 pb-5 flex flex-col items-center text-center bg-white">
+            <h2 className="text-[19px] font-bold text-gray-900 mb-4 leading-tight group-hover:text-orange-600 transition-colors duration-300">
+              {resort.title}
+            </h2>
 
-            {/* Button */}
-            <button
-              className="w-full py-2 text-white rounded-lg mt-auto transition-all duration-300 hover:opacity-90 transform group-hover:-translate-y-1"
-              style={{ backgroundColor: resort.buttonColor || '#ef4444' }}
-            >
-              <span className="flex items-center justify-center">
-                Know More
-                <svg
-                  className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </span>
+            {/* Button - Orange gradient with rounded corners */}
+            <button className="w-full py-3 px-5 text-white font-semibold text-[14px] rounded-xl transition-all duration-300 hover:shadow-lg transform hover:scale-[1.02] bg-gradient-to-r from-[#F59E42] to-[#F5A952] shadow-md">
+              View Package
             </button>
           </div>
         </div>
@@ -181,10 +164,9 @@ const ResortsSlider = () => {
 
   return (
     <section className="mx-auto max-w-[1340px] mt-36 mb-36 px-4">
-      <div className="text-center mb-10">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4 relative inline-block">
+      <div className="text-center mb-14">
+        <h2 className="text-[42px] font-bold text-gray-900 leading-tight">
           Explore Our Resorts
-          <span className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-20 h-1 bg-gradient-to-r from-red-400 to-red-300 rounded"></span>
         </h2>
       </div>
 
@@ -208,9 +190,7 @@ const ResortsSlider = () => {
               <FaCaretLeft className="text-2xl" />
             </button>
 
-            <div className="relative flex-1 overflow-hidden">
-              <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-              <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+            <div className="relative flex-1 overflow-hidden py-4">
               
               <div
                 ref={containerRef}

@@ -143,10 +143,11 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { motion, AnimatePresence } from "framer-motion";
+import { getHeroSection } from "../../api/api";
 
-const HeroReusable = ({ pageTitle, heroTitle, heroSubtitle }) => {
-  const [videoUrl, setVideoUrl] = useState("");
-  const [loading, setLoading] = useState(true);
+const HeroReusable = ({ pageTitle, heroTitle, heroSubtitle, videoUrl: propVideoUrl }) => {
+  const [videoUrl, setVideoUrl] = useState(propVideoUrl || "");
+  const [loading, setLoading] = useState(!propVideoUrl);
 
   // 🔍 SEARCH STATES (SAME AS HERO FILE)
   const [showSearch, setShowSearch] = useState(false);
@@ -156,20 +157,12 @@ const HeroReusable = ({ pageTitle, heroTitle, heroSubtitle }) => {
 
   // 🎥 FETCH HERO VIDEO
   useEffect(() => {
+    if (propVideoUrl) return; // already set by parent
     const fetchHeroVideo = async () => {
       try {
-        const res = await fetch("http://localhost:5000/admin/hero/video");
-        const data = await res.json();
-
-        const pageItem = data?.data?.find(
-          (item) => item.title === pageTitle
-        );
-
-        const publicVideo = pageItem?.video_url?.find(
-          (v) => v.visibility === "Public"
-        );
-
-        if (publicVideo?.url) setVideoUrl(publicVideo.url);
+        const res = await getHeroSection(pageTitle);
+        const url = res?.data?.publicUrl?.[0] || "";
+        if (url) setVideoUrl(url);
       } catch (err) {
         console.error("Hero video error:", err);
       } finally {
@@ -178,7 +171,7 @@ const HeroReusable = ({ pageTitle, heroTitle, heroSubtitle }) => {
     };
 
     fetchHeroVideo();
-  }, [pageTitle]);
+  }, [pageTitle, propVideoUrl]);
 
   if (loading) return null;
 

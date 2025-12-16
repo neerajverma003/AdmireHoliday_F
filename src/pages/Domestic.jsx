@@ -254,7 +254,9 @@ import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
 import DestinationGrid from "../Components/destinations/DestinationGrid";
 import HeroReusable from "../Components/heroSection/HeroReusable";
-import TravelGallery from "../Components/TravelGallery";
+import SubscribeUs from "../forms/SubscribeUs";
+import VideoTestimonials from "../Components/VideoTestimonials";
+// import TravelGallery from "../Components/TravelGallery";
 import { getDomesticAndInternationalPage } from "../api/api";
 
 const Domestic = () => {
@@ -298,8 +300,9 @@ const Domestic = () => {
       <NavBar />
 
       <HeroReusable
-        pageTitle="Domestic"
+        pageTitle="domestic"
         heroTitle="Explore The Best Domestic Tour Packages in India"
+        heroSubtitle="Discover India's most beautiful destinations"
       />
 
       <div className="py-12 bg-gray-50">
@@ -315,8 +318,10 @@ const Domestic = () => {
         )}
       </div>
 
-      <TravelGallery />
-      {/* <Footer /> */}
+      <VideoTestimonials />
+      <SubscribeUs />
+      {/* <TravelGallery /> */}
+      <Footer />
     </>
   );
 };

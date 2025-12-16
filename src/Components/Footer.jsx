@@ -40,7 +40,7 @@ const Footer = () => {
                       src={logo}
                       alt="Admire"
                       className="
-                 h-14 md:h-16
+                 h-8 md:h-10
                  object-contain block
                  scale-150
                  transition-transform duration-300

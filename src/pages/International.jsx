@@ -116,32 +116,12 @@ import TravelGallery from "../Components/TravelGallery";
 import VideoTestimonials from "../Components/VideoTestimonials";
 import SubscribeUs from "../forms/SubscribeUs";
 import {  getDomesticAndInternationalPage } from "../api/api";
-import { getHeroSection } from "../api/api";
 
 
 const International = () => {
-  const [videoUrl, setVideoUrl] = useState(null);
   const [destinations, setDestinations] = useState([]);
-  const [heroLoading, setHeroLoading] = useState(true);
   const [destinationsLoading, setDestinationsLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // Fetch hero video
-  useEffect(() => {
-    const fetchVideo = async () => {
-      try {
-        const { data } = await getHeroSection("international");
-        setVideoUrl(data?.publicUrl[0]);
-      } catch (error) {
-        console.error("Error loading video:", error);
-        setError("Failed to load hero video");
-        setVideoUrl(null);
-      } finally {
-        setHeroLoading(false);
-      }
-    };
-    fetchVideo();
-  }, []);
 
   // Fetch international destinations
   useEffect(() => {
@@ -188,10 +168,9 @@ const International = () => {
     <div>
       <NavBar />
       <HeroReusable
-       videoUrl={videoUrl}
-        type="video/mp4"
-        title="Discover International Destinations"
-        loading={heroLoading}
+        pageTitle="international"
+        heroTitle="Discover International Destinations"
+        heroSubtitle="Explore beautiful destinations around the world"
       />
 
       <div className="py-12 bg-gray-50">

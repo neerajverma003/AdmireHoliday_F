@@ -493,7 +493,7 @@ const ItineraryDetails = () => {
                       <FaPhone className="mr-2" /> Book Now
                     </button>
                     <button className="w-full mt-2 px-6 py-3 bg-white text-[#E69233] font-semibold rounded-lg border border-[#E69233] hover:bg-gray-50 transition flex items-center justify-center">
-                      Enquire Now
+                      Get a free consultancy
                     </button>
                   </div>
 

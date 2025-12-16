@@ -68,7 +68,7 @@
 // export default api;
 
 import axios from "axios";
-const baseURL = "https://api.admireholidays.com";
+const baseURL = import.meta.env.VITE_API_BASE_URL || "https://api.admireholidays.com";
 
 // Create the axios instance
 const api = axios.create({
@@ -91,7 +91,7 @@ export const submitSuggestionComplaint = (data) =>
   api.post("/suggestionComplain", data);
 export const travelGallery = () => api.get("/customer-gallery");
 
-export const getHeroSection = (title) => api.get(`/admin/hero/${title}`);
+export const getHeroSection = (title) => api.get(`/hero-section/${title}`);
 
 // export const getHeroSection = () => api.get("/admin/hero");
 
