@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, X, Grid } from "lucide-react";
+import { travelGallery } from "../api/api";
 
 const TravelGallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -8,21 +9,33 @@ const TravelGallery = () => {
   const [images, setImages] = useState([]);
   const [imageIndexes, setImageIndexes] = useState([]);
 
-  // ✅ Fetch images from your API
+  // helper: return `count` unique random indexes from 0..max-1
+  const getUniqueRandomIndexes = (count, max) => {
+    const indices = Array.from({ length: max }, (_, i) => i);
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indices[i], indices[j]] = [indices[j], indices[i]];
+    }
+    return indices.slice(0, count);
+  };
+
+  // ✅ Fetch images from your API using the shared api client
   const response = async () => {
     try {
-      const result = await fetch("http://localhost:5000/image");
-      const res = await result.json();
+      const res = await travelGallery();
+      const data = res?.data;
 
-      // Flatten all `image` arrays from backend data
-      const allImages = res.flatMap((item) =>
-        item.image.map((url) => ({ url }))
+      const gallery = data?.customerGalleryData || [];
+
+      // Flatten backend `customerGalleryData` -> images
+      const allImages = gallery.flatMap((item) =>
+        (item.image || []).map((img) => ({ url: img.url }))
       );
 
       setImages(allImages);
-      // console.log("✅ Flattened Images:", allImages);
     } catch (error) {
-      console.log(error);
+      console.log("TravelGallery fetch error:", error);
+      setImages([]);
     }
   };
 
@@ -33,16 +46,11 @@ const TravelGallery = () => {
   // ✅ Auto-change images in the grid
   useEffect(() => {
     if (images.length > 0) {
-      setImageIndexes(
-        Array.from({ length: Math.min(8, images.length) }, () =>
-          Math.floor(Math.random() * images.length)
-        )
-      );
+      const count = Math.min(8, images.length);
+      setImageIndexes(getUniqueRandomIndexes(count, images.length));
 
       const interval = setInterval(() => {
-        setImageIndexes((prevIndexes) =>
-          prevIndexes.map((index) => (index + 1) % images.length)
-        );
+        setImageIndexes(getUniqueRandomIndexes(count, images.length));
       }, 3000);
 
       return () => clearInterval(interval);
