@@ -32,22 +32,20 @@ const ExclusivePackages = ({ title, description, customClass = "" }) => {
             pkg.classification.includes("Exclusive")
         );
 
-        const formatted = exclusive.slice(0, 4).map((pkg) => ({
+        const formatted = exclusive.map((pkg) => ({
           id: pkg._id,
-          title: pkg.title || "Red Ford",
-          price: pkg.pricing?.standard_price || "2999",
-          discount: "10% off",
-          description:
-            "At TripToHoneymoon, our journey began with a simple yet profound desire:",
+          title: pkg.title,
+          price: pkg.pricing?.standard_price,
+          duration: pkg.duration,
+          description: pkg.destination_detail?.slice(0, 110) + "...",
           image:
-            pkg.destination_thumbnails?.[0] ||
-            "/images/default-package.jpg",
+            pkg.destination_thumbnails?.[0] || "/images/default-package.jpg",
           link: `/itineraries/${pkg._id}`,
         }));
 
         setData(formatted);
       } catch (err) {
-        console.error(err);
+        console.error("Package fetch error:", err);
       }
     };
 
@@ -67,13 +65,13 @@ const ExclusivePackages = ({ title, description, customClass = "" }) => {
 
     animationRef.current = gsap.to(containerRef.current, {
       x: 0,
-      duration: 6,
+      duration: 7,
       ease: "none",
       repeat: -1,
       modifiers: {
         x: gsap.utils.unitize((x) => {
           const val = parseFloat(x);
-          return ((val % totalWidth) + totalWidth) % totalWidth - totalWidth;
+          return (((val % totalWidth) + totalWidth) % totalWidth) - totalWidth;
         }),
       },
     });
@@ -102,7 +100,7 @@ const ExclusivePackages = ({ title, description, customClass = "" }) => {
       ease: "power2.out",
       onComplete: () => {
         isManualScrolling.current = false;
-        setTimeout(() => animationRef.current?.play(), 2500);
+        setTimeout(() => animationRef.current?.play(), 2000);
       },
     });
   };
@@ -128,12 +126,7 @@ const ExclusivePackages = ({ title, description, customClass = "" }) => {
           <h4 className="text-sm font-extrabold text-gray-800 leading-tight">
             {pkg.title}
           </h4>
-          <p className="text-sm font-extrabold text-gray-800">
-            {pkg.price}
-            <span className="text-orange-500 text-xs font-bold ml-1">
-              ({pkg.discount})
-            </span>
-          </p>
+          <p className="text-sm font-extrabold text-gray-800">₹{pkg.price}</p>
         </div>
 
         {/* Description */}
@@ -144,17 +137,19 @@ const ExclusivePackages = ({ title, description, customClass = "" }) => {
         {/* Icons */}
         <div className="flex justify-between text-[11px] font-bold text-gray-500 mb-4">
           <span className="flex items-center gap-1">
-            <FaSun className="text-orange-400" /> Days
+            <FaSun className="text-orange-400" />
+            {pkg.duration}
           </span>
           <span className="flex items-center gap-1">
-            <FaMoon className="text-indigo-400" /> Night
+            <FaMoon className="text-indigo-400" />
+            Nights
           </span>
           <span className="flex items-center gap-1">
             <FaHotel /> Hotel
           </span>
-          <span className="flex items-center gap-1">
+          {/* <span className="flex items-center gap-1">
             <FaCar /> Transport
-          </span>
+          </span> */}
         </div>
 
         {/* Button */}
@@ -171,10 +166,9 @@ const ExclusivePackages = ({ title, description, customClass = "" }) => {
     <section className={`bg-white py-16 ${customClass}`}>
       <div className="max-w-7xl mx-auto px-4">
         {/* Heading */}
+
         <div className="text-center mb-12">
-          <p className="text-orange-500 text-sm font-bold mb-2">
-            {title}
-          </p>
+          <p className="text-orange-500 text-sm font-bold mb-2">{title}</p>
           <h2 className="text-xl md:text-2xl font-extrabold text-gray-900">
             {description}
           </h2>
