@@ -120,7 +120,7 @@ export const getDestinationItenary = () =>
   api.get("/destination/only-domestic-or-international/domestic");
 
 export const getItenaryOFDomesticInternationalPages = (id) =>
-  api.get(`/itinerary/${id}`);
+  api.get(`/destination/itinerary/${id}`);
 
 export const getTopSellingItineraries = () =>
   api.get("/destination/top-selling-itinerary");

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getExclusivePackages } from "../api/api";
+import { getItenaryOFDomesticInternationalPages } from "../api/api";
 import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
 import {
@@ -26,33 +26,26 @@ const ItineraryDetails = () => {
   useEffect(() => {
     const fetchItinerary = async () => {
       try {
-        const response = await getExclusivePackages();
-        console.log(response)
+        // Fetch single itinerary by ID from backend
+        const response = await getItenaryOFDomesticInternationalPages(id);
+        console.log("Fetched Itinerary:", response);
+        
         if (!response?.data?.data) {
           throw new Error("Invalid API response structure");
         }
 
-        const allItineraries = [
-          ...(response.data.data.exclusiveItineraryData || []),
-          ...(response.data.data.weekendItineraryDetails || [])
-        ];
-
-        const found = allItineraries.find(pkg => pkg._id === id);
-
-        if (!found) {
-          throw new Error("Itinerary not found");
-        }
-
-        setItinerary(found);
-        console.log(itinerary);
+        setItinerary(response.data.data);
       } catch (err) {
-        setError(err.message);
+        console.error("Error fetching itinerary:", err);
+        setError(err.message || "Failed to load itinerary");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchItinerary();
+    if (id) {
+      fetchItinerary();
+    }
   }, [id]);
 
   if (loading) {
@@ -110,7 +103,11 @@ const ItineraryDetails = () => {
                 </div>
                 <div className="flex items-center">
                   <FaRupeeSign className="text-[#E69233] mr-2" />
-                  <span className="font-bold">{itinerary.pricing}</span>
+                  <span className="font-bold">
+                    {typeof itinerary.pricing === 'object' && itinerary.pricing?.standard_price
+                      ? `₹${itinerary.pricing.standard_price}`
+                      : itinerary.pricing || 'On Request'}
+                  </span>
                 </div>
               </div>
               <div className="flex items-center">
@@ -377,7 +374,7 @@ const ItineraryDetails = () => {
                           Inclusions
                         </h3>
                         <ul className="space-y-2">
-                          {itinerary.inclusions?.map((item, i) => (
+                          {(Array.isArray(itinerary.inclusion) ? itinerary.inclusion : typeof itinerary.inclusion === 'string' ? itinerary.inclusion.split('\n').filter(i => i.trim()) : [])?.map((item, i) => (
                             <li key={i} className="flex items-start">
                               <span className="text-[#E69233] mr-2">✓</span>
                               <span>{item}</span>
@@ -390,7 +387,7 @@ const ItineraryDetails = () => {
                           Exclusions
                         </h3>
                         <ul className="space-y-2">
-                          {itinerary.exclusions?.map((item, i) => (
+                          {(Array.isArray(itinerary.exclusion) ? itinerary.exclusion : typeof itinerary.exclusion === 'string' ? itinerary.exclusion.split('\n').filter(i => i.trim()) : [])?.map((item, i) => (
                             <li key={i} className="flex items-start">
                               <span className="text-red-500 mr-2">✗</span>
                               <span>{item}</span>
@@ -477,7 +474,11 @@ const ItineraryDetails = () => {
                   <div className="space-y-4">
                     <div className="flex justify-between">
                       <span className="text-gray-600">Price per person</span>
-                      <span className="font-bold">{itinerary.pricing}</span>
+                      <span className="font-bold">
+                        {typeof itinerary.pricing === 'object' && itinerary.pricing?.standard_price
+                          ? `₹${itinerary.pricing.standard_price}`
+                          : itinerary.pricing || 'On Request'}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Duration</span>
@@ -486,7 +487,11 @@ const ItineraryDetails = () => {
                     <div className="pt-4 border-t">
                       <div className="flex justify-between font-bold text-lg">
                         <span>Total</span>
-                        <span>{itinerary.pricing}</span>
+                        <span>
+                          {typeof itinerary.pricing === 'object' && itinerary.pricing?.standard_price
+                            ? `₹${itinerary.pricing.standard_price}`
+                            : itinerary.pricing || 'On Request'}
+                        </span>
                       </div>
                     </div>
                     <button className="w-full mt-4 px-6 py-3 bg-[#E69233] text-white font-semibold rounded-lg hover:bg-[#d5822b] transition flex items-center justify-center">

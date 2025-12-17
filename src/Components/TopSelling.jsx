@@ -150,6 +150,7 @@
 
 
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { getTopSellingItineraries } from "../api/api";
 
@@ -174,6 +175,7 @@ const TopSellingPackages = () => {
           discount: "Top Selling",
           image: item.destination_thumbnails?.[0] || item.media?.[0] || "",
           tag: "Top Selling",
+          link: `/itineraries/${item._id}`,
         }));
 
         setPackages(mapped);
@@ -232,37 +234,39 @@ const TopSellingPackages = () => {
         ) : (
           <AnimatePresence mode="wait">
             {visiblePackages.length > 0 && (
-              <motion.div
-                key={visiblePackages[0].id}
-                initial={{ opacity: 0, x: 60 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -60 }}
-                transition={{ duration: 0.6 }}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden"
-              >
-                <div className="relative">
-                  <img
-                    src={visiblePackages[0].image}
-                    alt=""
-                    className="w-full h-[280px] object-cover"
-                  />
-                  <span className="absolute top-4 right-4 bg-orange-500 text-white text-xs px-3 py-1 rounded-full">
-                    {visiblePackages[0].tag}
-                  </span>
-                </div>
-
-                <div className="p-6">
-                  <h3 className="font-semibold text-gray-900 mb-2">
-                    {visiblePackages[0].title}
-                  </h3>
-                  <p className="text-sm text-gray-700">
-                    ₹{visiblePackages[0].price}{" "}
-                    <span className="text-orange-500">
-                      ({visiblePackages[0].discount})
+              <Link to={visiblePackages[0].link} className="block">
+                <motion.div
+                  key={visiblePackages[0].id}
+                  initial={{ opacity: 0, x: 60 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -60 }}
+                  transition={{ duration: 0.6 }}
+                  className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition cursor-pointer"
+                >
+                  <div className="relative">
+                    <img
+                      src={visiblePackages[0].image}
+                      alt=""
+                      className="w-full h-[280px] object-cover"
+                    />
+                    <span className="absolute top-4 right-4 bg-orange-500 text-white text-xs px-3 py-1 rounded-full">
+                      {visiblePackages[0].tag}
                     </span>
-                  </p>
-                </div>
-              </motion.div>
+                  </div>
+
+                  <div className="p-6">
+                    <h3 className="font-semibold text-gray-900 mb-2">
+                      {visiblePackages[0].title}
+                    </h3>
+                    <p className="text-sm text-gray-700">
+                      ₹{visiblePackages[0].price}{" "}
+                      <span className="text-orange-500">
+                        ({visiblePackages[0].discount})
+                      </span>
+                    </p>
+                  </div>
+                </motion.div>
+              </Link>
             )}
           </AnimatePresence>
         )}
@@ -277,37 +281,38 @@ const TopSellingPackages = () => {
                 />
               ))
             : visiblePackages.slice(1, 4).map((pkg, index) => (
-                <motion.div
-                  key={pkg.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ y: -6 }}
-                  className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition"
-                >
-                  <div className="relative">
-                    <img
-                      src={pkg.image}
-                      alt=""
-                      className="w-full h-44 object-cover"
-                    />
-                    <span className="absolute top-3 right-3 bg-orange-500 text-white text-xs px-3 py-1 rounded-full">
-                      {pkg.tag}
-                    </span>
-                  </div>
-
-                  <div className="p-5">
-                    <h4 className="font-semibold text-gray-900 mb-1">
-                      {pkg.title}
-                    </h4>
-                    <p className="text-sm text-gray-700">
-                      ₹{pkg.price}{" "}
-                      <span className="text-orange-500">
-                        ({pkg.discount})
+                <Link key={pkg.id} to={pkg.link} className="block">
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    whileHover={{ y: -6 }}
+                    className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition cursor-pointer h-full"
+                  >
+                    <div className="relative">
+                      <img
+                        src={pkg.image}
+                        alt=""
+                        className="w-full h-44 object-cover"
+                      />
+                      <span className="absolute top-3 right-3 bg-orange-500 text-white text-xs px-3 py-1 rounded-full">
+                        {pkg.tag}
                       </span>
-                    </p>
-                  </div>
-                </motion.div>
+                    </div>
+
+                    <div className="p-5">
+                      <h4 className="font-semibold text-gray-900 mb-1">
+                        {pkg.title}
+                      </h4>
+                      <p className="text-sm text-gray-700">
+                        ₹{pkg.price}{" "}
+                        <span className="text-orange-500">
+                          ({pkg.discount})
+                        </span>
+                      </p>
+                    </div>
+                  </motion.div>
+                </Link>
               ))}
         </div>
       </div>
