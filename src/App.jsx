@@ -36,6 +36,7 @@ import Adventure from "./pages/category/Adventure";
 import Honeymoon from "./pages/category/Honeymoon";
 import Beach from "./pages/category/Beach";
 import ItineraryDetails from "./pages/ItineraryDetails";
+import DestinationItineraries from "./pages/DestinationItineraries";
 import ChatWidget from "./Components/ChatBot/ChatWidget";
 // import HeritageTours from "./pages/category/HeritageTours";
 // import AyurvedaTours from "./pages/category/ayurveda-tours";
@@ -72,6 +73,7 @@ function App() {
 
         <Route path="/international" element={<International />} />
         <Route path="/destinations/:slug" element={<DestinationDetail />} />
+        <Route path="/destination-itineraries/:destinationId" element={<DestinationItineraries />} />
         
 
 

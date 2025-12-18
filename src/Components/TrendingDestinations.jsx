@@ -431,60 +431,63 @@ const DestinationCard = ({ destination }) => {
 
   const shouldLoop = images.length > 1;
 
+  const handleCardClick = () => {
+    // Navigate to destination itineraries page using destination ID
+    window.location.href = `/destination-itineraries/${destination._id}`;
+  };
+
   return (
-    <div className="w-72 rounded-xl overflow-hidden shadow-lg cursor-pointer transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] bg-white hover:-translate-y-2 hover:shadow-xl">
-      <Link
-        to={`/destinations/${destination._id}`}
-        className="no-underline text-inherit"
-      >
-        <div className="h-80 relative overflow-hidden">
-          <Swiper
-            modules={[Autoplay, EffectFade]}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-            effect="fade"
-            speed={1000}
-            loop={shouldLoop}
-            className="w-full h-full"
-          >
-            {images.length > 0 ? (
-              images.map((imgUrl, idx) => (
-                <SwiperSlide key={idx}>
-                  <img
-                    src={imgUrl}
-                    alt={`Image ${idx + 1} of ${
-                      destination.destination_name || "Destination"
-                    }`}
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                    loading="lazy"
-                  />
-                </SwiperSlide>
-              ))
-            ) : (
-              <SwiperSlide>
+    <div 
+      className="w-72 rounded-xl overflow-hidden shadow-lg cursor-pointer transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] bg-white hover:-translate-y-2 hover:shadow-xl"
+      onClick={handleCardClick}
+    >
+      <div className="h-80 relative overflow-hidden">
+        <Swiper
+          modules={[Autoplay, EffectFade]}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          effect="fade"
+          speed={1000}
+          loop={shouldLoop}
+          className="w-full h-full"
+        >
+          {images.length > 0 ? (
+            images.map((imgUrl, idx) => (
+              <SwiperSlide key={idx}>
                 <img
-                  src="https://placehold.co/400x500?text=No+Image"
-                  alt="No image available"
-                  className="w-full h-full object-cover"
+                  src={imgUrl}
+                  alt={`Image ${idx + 1} of ${
+                    destination.destination_name || "Destination"
+                  }`}
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                  loading="lazy"
                 />
               </SwiperSlide>
-            )}
-          </Swiper>
-
-          {destination?.terms_and_conditions && (
-            <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/80 to-transparent text-left text-white">
-              <p className="m-0 text-sm md:text-base opacity-90">
-                {destination.terms_and_conditions}
-              </p>
-            </div>
+            ))
+          ) : (
+            <SwiperSlide>
+              <img
+                src="https://placehold.co/400x500?text=No+Image"
+                alt="No image available"
+                className="w-full h-full object-cover"
+              />
+            </SwiperSlide>
           )}
-        </div>
+        </Swiper>
 
-        <div className="p-4 text-left bg-white">
-          <h3 className="text-lg font-semibold text-gray-800 hover:text-red-600 transition-colors duration-200">
-            {destination.destination_name || "Untitled Destination"}
-          </h3>
-        </div>
-      </Link>
+        {destination?.terms_and_conditions && (
+          <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/80 to-transparent text-left text-white">
+            <p className="m-0 text-sm md:text-base opacity-90">
+              {destination.terms_and_conditions}
+            </p>
+          </div>
+        )}
+      </div>
+
+      <div className="p-4 text-left bg-white">
+        <h3 className="text-lg font-semibold text-gray-800 hover:text-red-600 transition-colors duration-200">
+          {destination.destination_name || "Untitled Destination"}
+        </h3>
+      </div>
     </div>
   );
 };
