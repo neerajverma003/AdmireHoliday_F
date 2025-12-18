@@ -110,6 +110,8 @@ export const getExclusivePackages = () =>
   api.get("/destination/classified-itinerary");
 export const getTrendingDestinations = () =>
   api.get("/destination/home/trending-destination");
+export const getHoneymoonDestinations = () =>
+  api.get("/destination/home/honeymoon-destination");
 export const getInternationalPackages = () =>
   api.get("/destination/home/international-packages");
 

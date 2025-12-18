@@ -1,39 +1,41 @@
-import React from "react";
-
-const data = [
-  {
-    title: "Vattikan",
-    img: "https://images.unsplash.com/photo-1505765052862-8f3f0a5d1c3d",
-    tag: "Trending",
-  },
-  {
-    title: "Bali",
-    img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
-    tag: "Trending",
-  },
-  {
-    title: "Singapore",
-    img: "https://images.unsplash.com/photo-1504615755583-2916b52192d8",
-    tag: "Trending",
-  },
-  {
-    title: "Udaipur",
-    img: "https://images.unsplash.com/photo-1548013146-72479768bada",
-    tag: "",
-  },
-  {
-    title: "Manali",
-    img: "https://images.unsplash.com/photo-1610878180933-1237c251f1b1",
-    tag: "Trending",
-  },
-  {
-    title: "Kerla",
-    img: "https://images.unsplash.com/photo-1500534623283-312aade485b7",
-    tag: "Trending",
-  },
-];
+import React, { useState, useEffect } from "react";
+import { getHoneymoonDestinations } from "../api/api";
+import { Loader2 } from "lucide-react";
 
 export default function SpecialHoneymoonDeals() {
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchHoneymoonDestinations = async () => {
+      try {
+        setIsLoading(true);
+        const response = await getHoneymoonDestinations();
+        
+        if (response.data.success) {
+          // Transform backend data to match our card format
+          const transformedData = response.data.data.map((destination) => ({
+            _id: destination._id,
+            title: destination.destination_name,
+            img: destination.title_image && destination.title_image[0] ? destination.title_image[0] : "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
+            tag: "Honeymoon",
+          }));
+          setData(transformedData);
+        } else {
+          setError("Failed to fetch honeymoon destinations");
+        }
+      } catch (err) {
+        console.error("Error fetching honeymoon destinations:", err);
+        setError("Error loading honeymoon destinations");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchHoneymoonDestinations();
+  }, []);
+
   return (
     <div className="w-full py-16 bg-white">
       {/* Section Title */}
@@ -46,39 +48,66 @@ export default function SpecialHoneymoonDeals() {
         </h2>
       </div>
 
+      {/* Loading State */}
+      {isLoading && (
+        <div className="flex justify-center items-center py-16">
+          <Loader2 className="w-8 h-8 animate-spin text-orange-400" />
+          <span className="ml-2 text-gray-600">Loading honeymoon destinations...</span>
+        </div>
+      )}
+
+      {/* Error State */}
+      {error && (
+        <div className="text-center py-16">
+          <p className="text-red-500">{error}</p>
+        </div>
+      )}
+
+      {/* Empty State */}
+      {!isLoading && !error && data.length === 0 && (
+        <div className="text-center py-16">
+          <p className="text-gray-500">No honeymoon destinations available yet</p>
+        </div>
+      )}
+
       {/* Cards Grid */}
-      <div className="max-w-7xl  h-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
-        {data.map((item, index) => (
-          <div
-            key={index}
-            className="relative bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition"
-          >
-            {/* Image */}
-            <img
-              src={item.img}
-              alt={item.title}
-              className="w-full h-52 object-cover"
-            />
+      {!isLoading && !error && data.length > 0 && (
+        <div className="max-w-7xl h-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
+          {data.map((item, index) => (
+            <div
+              key={item._id || index}
+              className="relative bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition"
+            >
+              {/* Image */}
+              <img
+                src={item.img}
+                alt={item.title}
+                className="w-full h-52 object-cover"
+                onError={(e) => {
+                  e.target.src = "https://images.unsplash.com/photo-1506905925346-21bda4d32df4";
+                }}
+              />
 
-            {/* Bottom Title */}
-            <div className="absolute bottom-4 left-4 text-white font-semibold text-lg drop-shadow-lg">
-              {item.title}
+              {/* Bottom Title */}
+              <div className="absolute bottom-4 left-4 text-white font-semibold text-lg drop-shadow-lg">
+                {item.title}
+              </div>
+
+              {/* Honeymoon Tag */}
+              {item.tag && (
+                <span className="absolute top-4 right-4 bg-orange-400 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                  {item.tag}
+                </span>
+              )}
+
+              {/* Bottom Right Icon */}
+              <button className="absolute bottom-4 right-4 bg-white text-gray-700 w-8 h-8 rounded-full shadow-md flex items-center justify-center hover:bg-gray-100">
+                <span className="text-lg">•</span>
+              </button>
             </div>
-
-            {/* Trending Tag */}
-            {item.tag && (
-              <span className="absolute top-4 right-4 bg-orange-400 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                {item.tag}
-              </span>
-            )}
-
-            {/* Bottom Right Icon */}
-            <button className="absolute bottom-4 right-4 bg-white text-gray-700 w-8 h-8 rounded-full shadow-md flex items-center justify-center hover:bg-gray-100">
-              <span className="text-lg">•</span>
-            </button>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
