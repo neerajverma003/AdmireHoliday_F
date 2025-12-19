@@ -437,9 +437,11 @@
 
 
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const DomesticPackage = () => {
+  const navigate = useNavigate();
   const [destinations, setDestinations] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -503,6 +505,10 @@ const DomesticPackage = () => {
   // ============================
   const getCardHeight = () => "h-[350px]"; // CHANGE HEIGHT ANYTIME
 
+  const handleCardClick = (destinationId) => {
+    navigate(`/destination-itineraries/${destinationId}`);
+  };
+
   return (
     <section className="py-20 bg-gradient-to-b from-white to-gray-50">
       {/* Title Section */}
@@ -555,34 +561,30 @@ const DomesticPackage = () => {
                 className={`relative rounded-3xl overflow-hidden bg-white shadow-lg hover:shadow-2xl cursor-pointer group 
                   ${getCardHeight()} ${getCardStyle(index)}
                 `}
+                onClick={() => handleCardClick(item._id)}
               >
-                <a
-                  href={`/destinations/${item.destination_name.toLowerCase()}`}
-                  className="block w-full h-full"
-                >
-                  {/* IMAGE */}
-                  <div className="relative w-full h-full overflow-hidden">
-                    <motion.img
-                      src={imgURL}
-                      alt={item.destination_name}
-                      className="w-full h-full object-cover"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.6 }}
-                    />
+                {/* IMAGE */}
+                <div className="relative w-full h-full overflow-hidden">
+                  <motion.img
+                    src={imgURL}
+                    alt={item.destination_name}
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.6 }}
+                  />
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                </div>
 
-                  {/* TITLE */}
-                  <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
-                    <motion.span
-                      className="inline-block bg-white/20 backdrop-blur-md text-white text-lg font-bold px-6 py-2 rounded-full border border-white/30 shadow-xl"
-                      whileHover={{ scale: 1.05 }}
-                    >
-                      {item.destination_name}
-                    </motion.span>
-                  </div>
-                </a>
+                {/* TITLE */}
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
+                  <motion.span
+                    className="inline-block bg-white/20 backdrop-blur-md text-white text-lg font-bold px-6 py-2 rounded-full border border-white/30 shadow-xl"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    {item.destination_name}
+                  </motion.span>
+                </div>
               </motion.div>
             );
           })}

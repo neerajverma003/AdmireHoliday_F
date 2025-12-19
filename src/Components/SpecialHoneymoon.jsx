@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { getHoneymoonDestinations } from "../api/api";
 import { Loader2 } from "lucide-react";
 
 export default function SpecialHoneymoonDeals() {
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -35,6 +37,10 @@ export default function SpecialHoneymoonDeals() {
 
     fetchHoneymoonDestinations();
   }, []);
+
+  const handleCardClick = (destinationId) => {
+    navigate(`/destination-itineraries/${destinationId}`);
+  };
 
   return (
     <div className="w-full py-16 bg-white">
@@ -76,7 +82,8 @@ export default function SpecialHoneymoonDeals() {
           {data.map((item, index) => (
             <div
               key={item._id || index}
-              className="relative bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition"
+              className="relative bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition cursor-pointer"
+              onClick={() => handleCardClick(item._id)}
             >
               {/* Image */}
               <img
@@ -101,7 +108,12 @@ export default function SpecialHoneymoonDeals() {
               )}
 
               {/* Bottom Right Icon */}
-              <button className="absolute bottom-4 right-4 bg-white text-gray-700 w-8 h-8 rounded-full shadow-md flex items-center justify-center hover:bg-gray-100">
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleCardClick(item._id);
+                }}
+                className="absolute bottom-4 right-4 bg-white text-gray-700 w-8 h-8 rounded-full shadow-md flex items-center justify-center hover:bg-gray-100">
                 <span className="text-lg">•</span>
               </button>
             </div>

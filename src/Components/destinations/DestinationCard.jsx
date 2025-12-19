@@ -16,7 +16,7 @@ const DestinationCard = ({ destination }) => {
   }
 
   const handleCardClick = () => {
-    navigate(`/destinations/${destination.slug}`);
+    navigate(`/destination-itineraries/${destination.id || destination._id}`);
   };
 
   // Get the first image or use a fallback

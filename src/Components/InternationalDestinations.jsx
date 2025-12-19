@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const InternationalPackage = () => {
+  const navigate = useNavigate();
   const [destinations, setDestinations] = useState([]);
   const animationFrameRef = useRef(null);
   const animationOffsetRef = useRef(0);
@@ -58,6 +60,10 @@ const InternationalPackage = () => {
 
     fetchDestinations();
   }, []);
+
+  const handleCardClick = (card) => {
+    navigate(`/destination-itineraries/${card._id}`);
+  };
 
   //  Smooth continuous slider animation
   useEffect(() => {
@@ -195,27 +201,30 @@ const InternationalPackage = () => {
                   perspective: 1000
                 }}
               >
-                <div className="relative">
-                  <a href={card.slug ? `/destinations/${card.slug}` : "#"}>
-                    <img
-                      src={image}
-                      alt={card.destination_name}
-                      className="w-full h-[430px] object-cover    "
-                      loading="eager"
-                      decoding="async"
-                      style={{ pointerEvents: 'none' }}
-                    />
+                <div className="relative cursor-pointer" onClick={() => handleCardClick(card)}>
+                  <img
+                    src={image}
+                    alt={card.destination_name}
+                    className="w-full h-[430px] object-cover    "
+                    loading="eager"
+                    decoding="async"
+                    style={{ pointerEvents: 'none' }}
+                  />
 
-                    {/*  OVERLAY */}
-                    <div className="absolute inset-0 bg-black/35 flex flex-col justify-end p-5">
-                      <h3 className="self-center text-white text-lg font-semibold mb-3">
-                        {card.destination_name}
-                      </h3>
-                      <button className="self-center bg-orange-500 hover:bg-orange-600 text-white px-5 py-1.5 text-sm rounded-full transition">
-                        Package Now
-                      </button>
-                    </div>
-                  </a>
+                  {/*  OVERLAY */}
+                  <div className="absolute inset-0 bg-black/35 flex flex-col justify-end p-5">
+                    <h3 className="self-center text-white text-lg font-semibold mb-3">
+                      {card.destination_name}
+                    </h3>
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleCardClick(card);
+                      }}
+                      className="self-center bg-orange-500 hover:bg-orange-600 text-white px-5 py-1.5 text-sm rounded-full transition">
+                      Package Now
+                    </button>
+                  </div>
                 </div>
               </div>
             );
