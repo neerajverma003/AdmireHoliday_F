@@ -127,4 +127,16 @@ export const getItenaryOFDomesticInternationalPages = (id) =>
 export const getTopSellingItineraries = () =>
   api.get("/destination/top-selling-itinerary");
 
+// POST: consultation lead (Get Free Consultation)
+// Note: Admin endpoints are at /admin, not /api/v1/admin
+export const submitConsultationLead = (data) => {
+  const adminApi = axios.create({
+    baseURL: baseURL,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return adminApi.post("/admin/consultation-leads", data);
+};
+
 export default api;
