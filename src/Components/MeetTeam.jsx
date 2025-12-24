@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const teamMembers = [
   {
-    name: "Jatin Kumar",
+    name: "Sandeep",
     role: "CEO Founder",
     image: "https://randomuser.me/api/portraits/men/32.jpg",
   },
@@ -37,12 +37,12 @@ const MeetOurTeam = () => {
         transition={{ duration: 0.6 }}
         className="mb-10"
       >
-        <span className="text-orange-500 uppercase text-sm font-semibold tracking-wider">
+        <span className="text-center text-xl md:text-2xl font-extrabold text-orange-500">
           Meet Our Team
         </span>
-        <h2 className="text-2xl md:text-3xl font-bold mt-2">
+        {/* <h2 className="text-2xl md:text-3xl font-bold mt-2">
           The Admire Holidays Team
-        </h2>
+        </h2> */}
       </motion.div>
 
       {/* Cards */}

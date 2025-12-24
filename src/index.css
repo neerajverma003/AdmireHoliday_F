@@ -33,3 +33,98 @@ body {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Responsive helper overrides (non-invasive, applied after Tailwind utilities) */
+
+/* Make all images, videos and iframes fluid */
+img, picture, video, iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Ensure root container uses available width on small screens */
+.container {
+  max-width: 100% !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+/* Small-screen stacking and spacing adjustments */
+@media (max-width: 768px) {
+  /* Make common grid utilities collapse to single column */
+  .grid-cols-3, .grid-cols-4, .lg\:grid-cols-3, .xl\:grid-cols-3 {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+
+  /* Force directional flex rows to stack vertically on mobile */
+  .flex-row, .d-row, .row, .lg\:flex-row {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+
+  /* Make buttons and CTA elements easier to tap */
+  button, .btn, .cta {
+    width: 100% !important;
+    padding: 0.75rem 1rem !important;
+  }
+
+  /* Reduce excessive paddings on hero/banner areas */
+  .hero, .banner, .banner-carousel, .hero-section {
+    padding: 1.25rem 0 !important;
+  }
+
+  /* Tidy up sidebars and panels */
+  .sidebar, .aside, .dashboard-sidebar {
+    width: 100% !important;
+    position: relative !important;
+  }
+}
+
+@media (max-width: 450px) {
+  html { font-size: 15px; }
+
+  /* Slightly smaller headings on very small screens */
+  h1 { font-size: 1.25rem; }
+  h2 { font-size: 1.1rem; }
+
+  /* Reduce card paddings and ensure they fit mobile */
+  .card, .package-card, .destination-card, .resort-card {
+    padding: 0.75rem !important;
+    margin: 0.5rem 0 !important;
+  }
+
+  /* Allow nav menus to scroll horizontally if long */
+  nav, .nav, .navbar, .menu {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Make forms full-width on small screens */
+@media (max-width: 768px) {
+  input, textarea, select, .form-control {
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+}
+
+/* Fix: ensure visual absolute overlays do not block pointer events on mobile
+   - leave fixed modals/backdrops intact (they use fixed positioning)
+   - allow overlay children to remain interactive */
+.absolute.inset-0 {
+  pointer-events: none;
+}
+.absolute.inset-0 * {
+  pointer-events: auto;
+}
+
+
+/* Ensure interactive elements are always clickable on mobile */
+@media (max-width: 768px) {
+  a, button, input[type="button"], input[type="submit"], .btn, .cta {
+    pointer-events: auto !important;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.12);
+  }
+}
+

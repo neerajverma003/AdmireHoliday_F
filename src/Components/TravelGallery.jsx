@@ -125,13 +125,10 @@ const TravelGallery = () => {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-primaryHeading mb-4">
+          <h2 className="text-center text-xl md:text-2xl font-extrabold text-orange-500">
             Discover Unforgettable Moments
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We have created countless memories for our travelers. Explore the
-            beautiful destinations and experiences that await you.
-          </p>
+       
         </div>
 
         {/* Gallery Grid */}

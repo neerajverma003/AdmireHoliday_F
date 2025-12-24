@@ -131,7 +131,7 @@ const BlogSection = () => {
 
   return (
     <section className="py-12 px-4 max-w-7xl mx-auto">
-      <h2 className="text-3xl font-bold text-center mb-8">Our Latest Blogs</h2>
+      <h2 className="text-center text-xl md:text-2xl font-extrabold text-orange-500 mb-12 ">Our Latest Blogs</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {blogs.map((blog) => (

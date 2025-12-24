@@ -50,7 +50,7 @@ const ResortsSlider = () => {
     // Create the infinite scroll animation (left to right)
     const animation = gsap.to(container, {
       x: 0,
-      duration: 25,
+      duration: 50,
       ease: "none",
       repeat: -1,
       modifiers: {
@@ -165,7 +165,7 @@ const ResortsSlider = () => {
   return (
     <section className="mx-auto max-w-[1340px] mt-36 mb-36 px-4">
       <div className="text-center mb-14">
-        <h2 className="text-[42px] font-bold text-gray-900 leading-tight">
+        <h2 className="text-center text-xl md:text-2xl font-extrabold text-orange-500">
           Explore Our Resorts
         </h2>
       </div>

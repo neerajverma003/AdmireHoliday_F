@@ -148,7 +148,7 @@ const SubscribeUs = () => {
 
       {/* Form Container */}
       <div className="z-10 w-full max-w-lg sm:max-w-3xl bg-white/30 backdrop-blur-xl p-6 sm:p-10 rounded-2xl shadow-2xl">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-4">
+        <h2 className="text-3xl sm:text-4xl font-bold text-center text-orange-500 mb-4">
           Stay in the Loop
         </h2>
         <p className="text-center text-gray-700 mb-8 px-2 sm:px-0">
@@ -215,7 +215,7 @@ const SubscribeUs = () => {
             type="submit"
             className={`w-full py-3 rounded-full text-white font-semibold text-lg transition duration-300 shadow-md ${isSubmitting
                 ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-yellow-500 hover:bg-red-600'
+                : 'bg-orange-500 hover:bg-red-600'
             }`}
             disabled={isSubmitting}
           >

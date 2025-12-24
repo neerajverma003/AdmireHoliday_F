@@ -304,85 +304,266 @@
 // export default Home;
 
 
-import React from "react";
+// import React from "react";
+// import NavBar from "../Components/NavBar";
+// import Hero from "../Components/heroSection/Hero";
+// import TrendingDestinations from "../Components/TrendingDestinations";
+// import ExclusivePackages from "../Components/ExclusivePackages";
+// import WeekendTrendingPackages from "../Components/WeekendTrendingPackages";
+// import InternationalDestinations from "../Components/InternationalDestinations";
+// import DomesticPackage from "../Components/DomesticPackage";
+// import Footer from "../Components/Footer";
+// import WeekendGatewayDestinations from "../Components/WeekendGatewayDestinations";
+// import ResortsSlider from "../Components/ResortSlider";
+// import TravelTips from "../Components/TravelTips";
+// import WhyBookAdmireHolidays from "../Components/WhyBookAdmireHolidays";
+// import TravelGallery from "../Components/TravelGallery";
+// import VideoTestimonials from "../Components/VideoTestimonials";
+// import SubscribeUs from "../forms/SubscribeUs";
+// import StatsAndPartners from "../Components/StatsAndPartners";
+// import { Link } from "react-router-dom";
+// import EnquiryForm from "../forms/EnquiryForm";
+// import TestimonialSlider from "../Components/TestimonialSlider";
+// import ChatWidget from "../Components/ChatBot/ChatWidget";
+// import WhyChoose from "../Components/WhyChoose"
+// import TopSelling from "../Components/TopSelling";
+// import SpecialHoneymoon from "../Components/SpecialHoneymoon"; 
+
+// const Home = () => {
+//   return (
+//     <div className="home-page bg-[#f6f6f6] min-h-screen">
+
+//       <EnquiryForm />
+//       <NavBar />
+//       <Hero
+//         videoSrc="src/assets/videos/Hero-video.mp4"
+//         title="Discover Domestic Destinations"
+//       />
+
+//       <ExclusivePackages
+//         title="Exclusive Tour Packages"
+//         description="Curated packages designed to suit every traveler's needs"
+//       />  
+//       <WhyChoose/>
+//       <TopSelling/>
+
+
+//       <TrendingDestinations />
+
+//       <WeekendTrendingPackages
+//         title="Weekend Trending Packages"
+//         description="Perfect quick escapes for your busy schedule"
+//         customClass="bg-blue-50"
+//         />
+
+//       <InternationalDestinations />
+//       <SpecialHoneymoon/>
+// {/* 
+//       <ExclusivePackages
+//         title="International Holiday Packages"
+//         description="Explore the world with our exclusive deals"
+//       /> */}
+
+//       <StatsAndPartners />
+     
+//       <DomesticPackage />
+//       <WeekendGatewayDestinations />
+//       <ResortsSlider />
+//       <TravelTips />
+//       <WhyBookAdmireHolidays />
+//       <TravelGallery />
+//       <VideoTestimonials />
+//       <TestimonialSlider />
+//       <SubscribeUs />
+//       <Footer />
+
+//       <Link
+//         to="/HomeStickyFormPage"
+//         className="fixed right-0 top-1/2 -translate-y-1/2 bg-red-500 text-white px-1.5 py-2.5 rounded-tl-md rounded-bl-md font-semibold cursor-pointer z-[1000] no-underline shadow-md text-[14px] w-10 text-center [writing-mode:vertical-lr] [text-orientation:mixed] hover:bg-red-600 transition-colors duration-200"
+//         aria-label="Submit suggestions or complaints"
+//       >
+//         Suggestions/Complaints
+//       </Link>
+//     </div>
+//   );
+// };
+
+// export default Home;import React from "react";
+import { Link } from "react-router-dom";
+
+/* ===== Layout Components ===== */
 import NavBar from "../Components/NavBar";
+import Footer from "../Components/Footer";
+
+/* ===== Page Sections ===== */
 import Hero from "../Components/heroSection/Hero";
-import TrendingDestinations from "../Components/TrendingDestinations";
 import ExclusivePackages from "../Components/ExclusivePackages";
+import TrendingDestinations from "../Components/TrendingDestinations";
 import WeekendTrendingPackages from "../Components/WeekendTrendingPackages";
 import InternationalDestinations from "../Components/InternationalDestinations";
 import DomesticPackage from "../Components/DomesticPackage";
-import Footer from "../Components/Footer";
 import WeekendGatewayDestinations from "../Components/WeekendGatewayDestinations";
 import ResortsSlider from "../Components/ResortSlider";
 import TravelTips from "../Components/TravelTips";
 import WhyBookAdmireHolidays from "../Components/WhyBookAdmireHolidays";
 import TravelGallery from "../Components/TravelGallery";
 import VideoTestimonials from "../Components/VideoTestimonials";
-import SubscribeUs from "../forms/SubscribeUs";
-import StatsAndPartners from "../Components/StatsAndPartners";
-import { Link } from "react-router-dom";
-import EnquiryForm from "../forms/EnquiryForm";
 import TestimonialSlider from "../Components/TestimonialSlider";
-import ChatWidget from "../Components/ChatBot/ChatWidget";
-import WhyChoose from "../Components/WhyChoose"
+import StatsAndPartners from "../Components/StatsAndPartners";
+import WhyChoose from "../Components/WhyChoose";
 import TopSelling from "../Components/TopSelling";
-import SpecialHoneymoon from "../Components/SpecialHoneymoon"; 
+import SpecialHoneymoon from "../Components/SpecialHoneymoon";
+
+/* ===== Forms & Widgets ===== */
+import EnquiryForm from "../forms/EnquiryForm";
+import SubscribeUs from "../forms/SubscribeUs";
+import ChatWidget from "../Components/ChatBot/ChatWidget";
+
+/* ===== Reusable Section Wrapper ===== */
+const Section = ({ children, className = "" }) => (
+  <section
+    className={`px-4 sm:px-6 md:px-12 lg:px-20 py-10 md:py-16 ${className}`}
+  >
+    {children}
+  </section>
+);
 
 const Home = () => {
-  return (
-    <div className="home-page bg-[#f6f6f6] min-h-screen">
+  const isDesktop =
+    typeof window !== "undefined" && window.innerWidth >= 1024;
 
+  return (
+    <div className="home-page bg-[#f6f6f6] min-h-screen overflow-x-hidden">
+      {/* ===== Enquiry Floating Form ===== */}
       <EnquiryForm />
+
+      {/* ===== Navbar ===== */}
       <NavBar />
+
+      {/* ===== Hero Section ===== */}
       <Hero
         videoSrc="src/assets/videos/Hero-video.mp4"
         title="Discover Domestic Destinations"
+        className="h-[60vh] md:h-[85vh]"
       />
+  <Section>
+        <ExclusivePackages
+          title="Exclusive Tour Packages"
+          description="Curated packages designed to suit every traveler's needs"
+        /> 
+       </Section>
+      {/* ===== Top Selling (High Priority) ===== */}
+      <Section>
+        <TopSelling />
+      </Section>
+      {/* ===== Why Choose (Desktop First) ===== */}
+      <Section className="hidden md:block">
+        <WhyChoose />
+      </Section>
 
-      <ExclusivePackages
-        title="Exclusive Tour Packages"
-        description="Curated packages designed to suit every traveler's needs"
-      />  
-      <WhyChoose/>
-      <TopSelling/>
+      {/* ===== Trending Destinations ===== */}
+      <Section>
+        <TrendingDestinations />
+      </Section>
 
-
-      <TrendingDestinations />
-
-      <WeekendTrendingPackages
-        title="Weekend Trending Packages"
-        description="Perfect quick escapes for your busy schedule"
-        customClass="bg-blue-50"
+      {/* ===== Weekend Packages ===== */}
+      <Section className="bg-blue-50">
+        <WeekendTrendingPackages
+          title="Weekend Trending Packages"
+          description="Perfect quick escapes for your busy schedule"
         />
+      </Section>
 
-      <InternationalDestinations />
-      <SpecialHoneymoon/>
-{/* 
-      <ExclusivePackages
-        title="International Holiday Packages"
-        description="Explore the world with our exclusive deals"
-      /> */}
+      {/* ===== International Destinations ===== */}
+      <Section>
+        <InternationalDestinations />
+      </Section>
 
-      <StatsAndPartners />
-     
-      <DomesticPackage />
-      <WeekendGatewayDestinations />
-      <ResortsSlider />
-      <TravelTips />
-      <WhyBookAdmireHolidays />
-      <TravelGallery />
-      <VideoTestimonials />
-      <TestimonialSlider />
-      <SubscribeUs />
+      {/* ===== Honeymoon Special ===== */}
+      <Section>
+        <SpecialHoneymoon />
+      </Section>
+
+      {/* ===== Stats & Partners ===== */}
+      <Section>
+        <StatsAndPartners />
+      </Section>
+
+      {/* ===== Domestic Packages ===== */}
+      <Section>
+        <DomesticPackage />
+      </Section>
+
+      {/* ===== Weekend Gateways ===== */}
+      <Section>
+        <WeekendGatewayDestinations />
+      </Section>
+
+      {/* ===== Resorts Slider (Desktop Only for Performance) ===== */}
+      {isDesktop && (
+        <Section>
+          <ResortsSlider />
+        </Section>
+      )}
+
+      {/* ===== Travel Tips ===== */}
+      <Section>
+        <TravelTips />
+      </Section>
+
+      {/* ===== Why Book Admire ===== */}
+      <Section>
+        <WhyBookAdmireHolidays />
+      </Section>
+
+      {/* ===== Travel Gallery ===== */}
+      <Section>
+        <TravelGallery />
+      </Section>
+
+      {/* ===== Video Testimonials ===== */}
+      <Section>
+        <VideoTestimonials />
+      </Section>
+
+      {/* ===== Testimonial Slider ===== */}
+      <Section>
+        <TestimonialSlider />
+      </Section>
+
+      {/* ===== Subscribe Section ===== */}
+      <Section>
+        <SubscribeUs />
+      </Section>
+
+      {/* ===== Footer ===== */}
       <Footer />
 
+      {/* ===== Chat Widget ===== */}
+      <ChatWidget />
+
+      {/* ===== Sticky Suggestions Button (Desktop Only) ===== */}
       <Link
         to="/HomeStickyFormPage"
-        className="fixed right-0 top-1/2 -translate-y-1/2 bg-red-500 text-white px-1.5 py-2.5 rounded-tl-md rounded-bl-md font-semibold cursor-pointer z-[1000] no-underline shadow-md text-[14px] w-10 text-center [writing-mode:vertical-lr] [text-orientation:mixed] hover:bg-red-600 transition-colors duration-200"
+        className="
+          fixed right-0 top-1/2 -translate-y-1/2
+          hidden md:block
+          bg-red-500 hover:bg-red-600
+          text-white
+          px-1.5 py-2.5
+          rounded-tl-md rounded-bl-md
+          font-semibold
+          z-[1000]
+          shadow-md
+          text-[14px]
+          w-10 text-center
+          [writing-mode:vertical-lr]
+          [text-orientation:mixed]
+          transition-colors duration-200
+        "
         aria-label="Submit suggestions or complaints"
       >
-        Suggestions/Complaints
+        Suggestions / Complaints
       </Link>
     </div>
   );

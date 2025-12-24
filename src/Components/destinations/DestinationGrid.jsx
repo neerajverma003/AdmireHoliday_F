@@ -27,12 +27,10 @@ const DestinationGrid = ({
   return (
     <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-12">
-        <h2 className="text-3xl font-extrabold text-gray-900 mb-2">{title}</h2>
-        <p className="text-lg text-gray-600">
-          {type === 'domestic' 
-            ? 'Discover beautiful Indian destinations' 
-            : 'Explore amazing international locations'}
-        </p>
+        <h2 className="text-center text-xl md:text-2xl font-extrabold text-orange-500 mb-2">
+          {title}
+          </h2>
+       
       </div>
       
       <div className="mb-8 max-w-md mx-auto">

@@ -28,7 +28,7 @@ const InternationalPackage = () => {
 
         if (international?.length) {
           setDestinations(international);
-          
+
           // Preload all images
           const imagePromises = international.map((dest) => {
             return new Promise((resolve) => {
@@ -48,7 +48,7 @@ const InternationalPackage = () => {
               international.map((dest, i) => ({
                 ...dest,
                 offset: i * cardSpacing,
-                id: dest._id || i
+                id: dest._id || i,
               }))
             );
           });
@@ -75,47 +75,48 @@ const InternationalPackage = () => {
     const updateCards = (currentTime) => {
       const deltaTime = currentTime - lastTime;
       lastTime = currentTime;
-      
+
       // Smooth animation speed (60fps normalized)
-      animationOffsetRef.current += (deltaTime / 18) * 1.5;
-      
-      setCards(prevCards => 
-        prevCards.map(card => {
+      animationOffsetRef.current += (deltaTime / 30) * 0.8;
+
+      setCards((prevCards) =>
+        prevCards.map((card) => {
           const position = card.offset - animationOffsetRef.current;
-          
+
           let newOffset = card.offset;
           // Enhanced bidirectional looping - reset far outside visible range
           if (position < -(cardSpacing * 3)) {
             // When card goes far left, move it to far right (outside visible area)
             newOffset = card.offset + cardSpacing * totalCards;
           }
-          
+
           const currentPosition = newOffset - animationOffsetRef.current;
           const distanceFromCenter = Math.abs(currentPosition);
-          
+
           // Calculate position index (which card number from center)
           const positionIndex = Math.abs(currentPosition / cardSpacing);
-          
+
           // Smooth scaling based on distance
-          const scaleFactor = Math.max(0, 1 - (positionIndex / 4));
-          const scale = 0.7 + (scaleFactor * 0.5);
-          const heightScale = 1 + (scaleFactor * 0.1);
-          
+          const scaleFactor = Math.max(0, 1 - positionIndex / 4);
+          const scale = 0.7 + scaleFactor * 0.5;
+          const heightScale = 1 + scaleFactor * 0.1;
+
           // Show 6 cards: 2 left + center + 3 right (extended range for smooth slide-in)
           let opacity;
           if (positionIndex <= 4) {
             const fadeStart = 3.2;
             if (positionIndex <= fadeStart) {
-              opacity = Math.max(0.80, 1.2 - (positionIndex / 4));
+              opacity = Math.max(0.8, 1.2 - positionIndex / 4);
             } else {
               // Gradual fade-in for incoming cards from right (smooth slide-in)
-              const fadeProgress = (positionIndex - fadeStart) / (4 - fadeStart);
+              const fadeProgress =
+                (positionIndex - fadeStart) / (4 - fadeStart);
               opacity = Math.max(0, 1 - fadeProgress);
             }
           } else {
             opacity = 0;
           }
-          
+
           const zIndex = Math.floor(scale * 100);
 
           return {
@@ -125,7 +126,7 @@ const InternationalPackage = () => {
             scale,
             heightScale,
             opacity,
-            zIndex
+            zIndex,
           };
         })
       );
@@ -152,9 +153,6 @@ const InternationalPackage = () => {
           <p className="text-orange-500 font-semibold mb-2">
             International Destination
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-            Explore the World International Hotspots
-          </h2>
         </div>
         <div className="flex justify-center items-center h-[700px]">
           <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-orange-500"></div>
@@ -166,49 +164,60 @@ const InternationalPackage = () => {
   return (
     <section className="py-4 bg-white overflow-hidden">
       {/*  HEADER */}
-      <div className="text-center mb-20">
-        <p className="text-orange-500 font-semibold mb-2">
+      {/* <div className="text-center mb-12">
+        <p className=" ">
           International Destination
         </p>
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-          Explore the World International Hotspots
-        </h2>
-      </div>
+       
+      </div> */}
 
+      <div className="text-center mb-4 md:mb-6">
+        <p className="text-xl md:text-2xl font-extrabold text-orange-500">
+          International Destination
+        </p>
+      </div>
       {/*  CAROUSEL CONTAINER */}
       <div className="relative flex justify-center items-center overflow-hidden w-full h-[700px]">
-        <div className="absolute inset-0" style={{ clipPath: 'inset(0)' }}>
+        <div className="absolute inset-0" style={{ clipPath: "inset(0)" }}>
           {cards.map((card) => {
             const image = card.show_image?.[0] || card.title_image?.[0];
-            
+
             return (
               <div
                 key={card.id}
                 className="absolute rounded-3xl overflow-hidden shadow-2xl left-1/2"
                 style={{
-                  width: '260px',
-                  background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1))',
-                  border: '2px solid rgba(255, 255, 255, 0.3)',
-                  transform: `translateX(${card.currentPosition - 130}px) translateY(-50%) scale(${card.scale}) scaleY(${card.heightScale})`,
-                  top: '50%',
+                  width: "260px",
+                  background:
+                    "linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1))",
+                  border: "2px solid rgba(255, 255, 255, 0.3)",
+                  transform: `translateX(${
+                    card.currentPosition - 130
+                  }px) translateY(-50%) scale(${card.scale}) scaleY(${
+                    card.heightScale
+                  })`,
+                  top: "50%",
                   opacity: card.opacity,
                   zIndex: card.zIndex,
-                  visibility: card.opacity > 0.05 ? 'visible' : 'hidden',
-                  pointerEvents: card.opacity > 0.5 ? 'auto' : 'none',
-                  transition: 'none',
-                  willChange: 'transform, opacity',
-                  backfaceVisibility: 'hidden',
-                  perspective: 1000
+                  visibility: card.opacity > 0.05 ? "visible" : "hidden",
+                  pointerEvents: card.opacity > 0.5 ? "auto" : "none",
+                  transition: "none",
+                  willChange: "transform, opacity",
+                  backfaceVisibility: "hidden",
+                  perspective: 1000,
                 }}
               >
-                <div className="relative cursor-pointer" onClick={() => handleCardClick(card)}>
+                <div
+                  className="relative cursor-pointer"
+                  onClick={() => handleCardClick(card)}
+                >
                   <img
                     src={image}
                     alt={card.destination_name}
                     className="w-full h-[430px] object-cover    "
                     loading="eager"
                     decoding="async"
-                    style={{ pointerEvents: 'none' }}
+                    style={{ pointerEvents: "none" }}
                   />
 
                   {/*  OVERLAY */}
@@ -216,12 +225,13 @@ const InternationalPackage = () => {
                     <h3 className="self-center text-white text-lg font-semibold mb-3">
                       {card.destination_name}
                     </h3>
-                    <button 
+                    <button
                       onClick={(e) => {
                         e.stopPropagation();
                         handleCardClick(card);
                       }}
-                      className="self-center bg-orange-500 hover:bg-orange-600 text-white px-5 py-1.5 text-sm rounded-full transition">
+                      className="self-center bg-orange-500 hover:bg-orange-600 text-white px-5 py-1.5 text-sm rounded-full transition"
+                    >
                       Package Now
                     </button>
                   </div>

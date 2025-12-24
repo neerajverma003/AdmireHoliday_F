@@ -518,12 +518,10 @@ const DomesticPackage = () => {
         viewport={{ once: true }}
         className="text-center mb-16"
       >
-        <p className="text-orange-500 font-semibold text-sm tracking-wider uppercase mb-2">
+        <p className="text-center text-xl md:text-2xl font-extrabold text-orange-500">
           Domestic Destination
         </p>
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-          Explore the India; Domestic Hotspots
-        </h2>
+        
       </motion.div>
 
       {/* Loading Skeleton */}
@@ -568,7 +566,7 @@ const DomesticPackage = () => {
                   <motion.img
                     src={imgURL}
                     alt={item.destination_name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-orignal"
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.6 }}
                   />
@@ -614,3 +612,194 @@ const DomesticPackage = () => {
 };
 
 export default DomesticPackage;
+
+
+// import React, { useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// import { motion } from "framer-motion";
+
+// const DomesticPackage = () => {
+//   const navigate = useNavigate();
+//   const [destinations, setDestinations] = useState([]);
+//   const [loading, setLoading] = useState(false);
+
+//   useEffect(() => {
+//     const fetchDestinations = async () => {
+//       try {
+//         setLoading(true);
+//         const res = await fetch(
+//           "http://localhost:5000/api/v1/destination/home/get"
+//         );
+//         const data = await res.json();
+
+//         if (data?.data) {
+//           const domestic = data.data.filter(
+//             (d) => d.domestic_or_international === "Domestic"
+//           );
+//           setDestinations(domestic);
+//         }
+//       } catch (err) {
+//         console.log(err);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchDestinations();
+//   }, []);
+
+//   const fadeUp = {
+//     hidden: { opacity: 0, y: 30 },
+//     visible: {
+//       opacity: 1,
+//       y: 0,
+//       transition: { duration: 0.7 },
+//     },
+//   };
+
+//   /* ============================
+//      RESPONSIVE STAIRCASE LOGIC
+//   ============================ */
+//   const getCardStyle = (index) => {
+//     const col = index % 3;
+//     const row = Math.floor(index / 3);
+
+//     return `
+//       mt-0
+//       sm:${col === 1 ? "mt-6" : col === 2 ? "mt-12" : "mt-0"}
+//       lg:${
+//         row === 0
+//           ? col === 0
+//             ? "mt-0"
+//             : col === 1
+//             ? "mt-[60px]"
+//             : "mt-[115px]"
+//           : row === 1
+//           ? col === 0
+//             ? "-mt-[65px]"
+//             : col === 1
+//             ? "-mt-3"
+//             : "mt-10"
+//           : col === 1
+//           ? "mt-6"
+//           : col === 2
+//           ? "mt-12"
+//           : "mt-0"
+//       }
+//     `;
+//   };
+
+//   /* ============================
+//      RESPONSIVE HEIGHT
+//   ============================ */
+//   const getCardHeight = () =>
+//     "h-[260px] sm:h-[300px] lg:h-[350px]";
+
+//   const handleCardClick = (id) => {
+//     navigate(`/destination-itineraries/${id}`);
+//   };
+
+//   return (
+//     <section className="py-14 sm:py-20 bg-gradient-to-b from-white to-gray-50">
+//       {/* TITLE */}
+//       <motion.div
+//         initial={{ opacity: 0, y: -20 }}
+//         whileInView={{ opacity: 1, y: 0 }}
+//         viewport={{ once: true }}
+//         className="text-center mb-12 sm:mb-16 px-4"
+//       >
+//         <p className="text-center text-xl md:text-2xl font-extrabold text-orange-500">
+//           Domestic Destination
+//         </p>
+        
+//       </motion.div>
+
+//       {/* LOADING */}
+//       {loading && (
+//         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+//           {[...Array(6)].map((_, i) => (
+//             <div
+//               key={i}
+//               className={`bg-gray-200 rounded-3xl animate-pulse ${getCardHeight()}`}
+//             />
+//           ))}
+//         </div>
+//       )}
+
+//       {/* GRID */}
+//       {!loading && destinations.length > 0 && (
+//         <motion.div
+//           variants={fadeUp}
+//           initial="hidden"
+//           whileInView="visible"
+//           viewport={{ once: true }}
+//           className="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+//         >
+//           {destinations.map((item, index) => {
+//             const imgArr = Array.isArray(item.title_image)
+//               ? item.title_image
+//               : [];
+//             const imgURL =
+//               imgArr[0] ||
+//               "https://via.placeholder.com/600x400?text=No+Image";
+
+//             return (
+//               <motion.div
+//                 key={item._id}
+//                 whileHover={{ scale: 1.03 }}
+//                 whileTap={{ scale: 0.98 }}
+//                 transition={{ type: "spring", stiffness: 200, damping: 18 }}
+//                 className={`
+//                   relative rounded-3xl overflow-hidden bg-white shadow-lg 
+//                   hover:shadow-2xl cursor-pointer group 
+//                   ${getCardHeight()} ${getCardStyle(index)}
+//                 `}
+//                 onClick={() => handleCardClick(item._id)}
+//               >
+//                 {/* IMAGE */}
+//                 <div className="absolute inset-0">
+//                   <motion.img
+//                     src={imgURL}
+//                     alt={item.destination_name}
+//                     className="w-full h-full object-cover"
+//                     whileHover={{ scale: 1.1 }}
+//                     transition={{ duration: 0.6 }}
+//                   />
+//                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-transparent" />
+//                 </div>
+
+//                 {/* TITLE */}
+//                 <div className="absolute bottom-5 left-1/2 -translate-x-1/2">
+//                   <span className="inline-block bg-white/20 backdrop-blur-md text-white text-base sm:text-lg font-bold px-5 py-2 rounded-full border border-white/30 shadow-xl">
+//                     {item.destination_name}
+//                   </span>
+//                 </div>
+//               </motion.div>
+//             );
+//           })}
+//         </motion.div>
+//       )}
+
+//       {/* BUTTON */}
+//       {!loading && destinations.length > 0 && (
+//         <motion.div
+//           initial={{ opacity: 0 }}
+//           whileInView={{ opacity: 1 }}
+//           viewport={{ once: true }}
+//           className="text-center mt-14"
+//         >
+//           <motion.button
+//             whileHover={{ scale: 1.05 }}
+//             whileTap={{ scale: 0.95 }}
+//             onClick={() => navigate("/domestic")}
+//             className="px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold text-base sm:text-lg rounded-full shadow-xl hover:shadow-2xl transition"
+//           >
+//             Explore All Destinations
+//           </motion.button>
+//         </motion.div>
+//       )}
+//     </section>
+//   );
+// };
+
+// export default DomesticPackage;

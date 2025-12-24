@@ -14,13 +14,14 @@ export default function SpecialHoneymoonDeals() {
       try {
         setIsLoading(true);
         const response = await getHoneymoonDestinations();
-        
+
         if (response.data.success) {
-          // Transform backend data to match our card format
           const transformedData = response.data.data.map((destination) => ({
             _id: destination._id,
             title: destination.destination_name,
-            img: destination.title_image && destination.title_image[0] ? destination.title_image[0] : "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
+            img:
+              destination.title_image?.[0] ||
+              "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
             tag: "Honeymoon",
           }));
           setData(transformedData);
@@ -28,7 +29,6 @@ export default function SpecialHoneymoonDeals() {
           setError("Failed to fetch honeymoon destinations");
         }
       } catch (err) {
-        console.error("Error fetching honeymoon destinations:", err);
         setError("Error loading honeymoon destinations");
       } finally {
         setIsLoading(false);
@@ -38,88 +38,113 @@ export default function SpecialHoneymoonDeals() {
     fetchHoneymoonDestinations();
   }, []);
 
-  const handleCardClick = (destinationId) => {
-    navigate(`/destination-itineraries/${destinationId}`);
+  const handleCardClick = (id) => {
+    navigate(`/destination-itineraries/${id}`);
   };
 
   return (
-    <div className="w-full py-16 bg-white">
-      {/* Section Title */}
-      <div className="text-center mb-10">
-        <p className="text-orange-400 font-semibold text-sm tracking-wide">
+    <section className="w-full bg-white py-12 sm:py-16">
+      {/* Title */}
+      <div className="text-center mb-8 sm:mb-12 px-4">
+        <p className="text-center text-xl md:text-2xl font-extrabold text-orange-500 mb-10 md:mb-1">
           Special Honeymoon Deals
         </p>
-        <h2 className="text-3xl font-bold text-gray-800">
-          Special Honeymoon Deals
-        </h2>
       </div>
 
-      {/* Loading State */}
+      {/* Loading */}
       {isLoading && (
-        <div className="flex justify-center items-center py-16">
+        <div className="flex justify-center items-center py-20">
           <Loader2 className="w-8 h-8 animate-spin text-orange-400" />
-          <span className="ml-2 text-gray-600">Loading honeymoon destinations...</span>
+          <span className="ml-2 text-gray-600 text-sm sm:text-base">
+            Loading honeymoon destinations...
+          </span>
         </div>
       )}
 
-      {/* Error State */}
+      {/* Error */}
       {error && (
-        <div className="text-center py-16">
+        <div className="text-center py-20">
           <p className="text-red-500">{error}</p>
         </div>
       )}
 
-      {/* Empty State */}
+      {/* Empty */}
       {!isLoading && !error && data.length === 0 && (
-        <div className="text-center py-16">
-          <p className="text-gray-500">No honeymoon destinations available yet</p>
+        <div className="text-center py-20">
+          <p className="text-gray-500">
+            No honeymoon destinations available yet
+          </p>
         </div>
       )}
 
-      {/* Cards Grid */}
+      {/* Cards */}
       {!isLoading && !error && data.length > 0 && (
-        <div className="max-w-7xl h-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4">
-          {data.map((item, index) => (
+        <div className="
+          max-w-7xl mx-auto px-4
+          grid grid-cols-1
+          sm:grid-cols-2
+          md:grid-cols-3
+          lg:grid-cols-4
+          gap-6
+        ">
+          {data.map((item) => (
             <div
-              key={item._id || index}
-              className="relative bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition cursor-pointer"
+              key={item._id}
               onClick={() => handleCardClick(item._id)}
+              className="
+                group relative cursor-pointer overflow-hidden
+                rounded-2xl bg-white shadow-md
+                transition-all duration-300
+                hover:shadow-xl hover:-translate-y-1
+                active:scale-[0.98]
+              "
             >
               {/* Image */}
-              <img
-                src={item.img}
-                alt={item.title}
-                className="w-full h-52 object-cover"
-                onError={(e) => {
-                  e.target.src = "https://images.unsplash.com/photo-1506905925346-21bda4d32df4";
-                }}
-              />
+              <div className="relative">
+                <img
+                  src={item.img}
+                  alt={item.title}
+                  className="
+                    w-full object-cover
+                    h-56 sm:h-60 md:h-64
+                    transition-transform duration-500
+                    group-hover:scale-110
+                  "
+                  onError={(e) =>
+                    (e.target.src =
+                      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4")
+                  }
+                />
 
-              {/* Bottom Title */}
-              <div className="absolute bottom-4 left-4 text-white font-semibold text-lg drop-shadow-lg">
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+              </div>
+
+              {/* Title */}
+              <div className="
+                absolute bottom-4 left-4 right-4
+                text-white font-semibold
+                text-base sm:text-lg
+                leading-tight
+              ">
                 {item.title}
               </div>
 
-              {/* Honeymoon Tag */}
+              {/* Tag */}
               {item.tag && (
-                <span className="absolute top-4 right-4 bg-orange-400 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                <span className="
+                  absolute top-4 right-4
+                  bg-orange-400 text-white
+                  text-xs font-semibold
+                  px-3 py-1 rounded-full
+                ">
                   {item.tag}
                 </span>
               )}
-
-              {/* Bottom Right Icon */}
-              <button 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleCardClick(item._id);
-                }}
-                className="absolute bottom-4 right-4 bg-white text-gray-700 w-8 h-8 rounded-full shadow-md flex items-center justify-center hover:bg-gray-100">
-                <span className="text-lg">•</span>
-              </button>
             </div>
           ))}
         </div>
       )}
-    </div>
+    </section>
   );
 }

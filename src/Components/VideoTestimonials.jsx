@@ -236,12 +236,10 @@ const VideoTestimonials = () => {
     <section className="py-20 bg-white">
       {/* HEADING */}
       <div className="text-center mb-12">
-        <p className="text-orange-600 font-semibold text-sm">
+        <p className="text-center text-xl md:text-2xl font-extrabold text-orange-500">
           Hear From Our Happy Travelers
         </p>
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">
-          Real journeys, real stories. Watch what our travelers say!
-        </h2>
+  
       </div>
 
       {/* LOADING */}

@@ -9,12 +9,14 @@ import ContactHero from '../Components/contact/ContactHero'
  import TestimonialSlider from "../Components/TestimonialSlider"
  import TravelGallery from '../Components/TravelGallery'
  import ContactBanner from '../Components/ContactBanner';
+import ContactCards from '../Components/ContactCard'
 
 const Contact = () => {
   return (
     <div>
         <NavBar/>
         <ContactHero/>
+        <ContactCards/>
         {/* <SubscribeUs/> */}
         <ContactUs/>
         <WhyChooseUs/>

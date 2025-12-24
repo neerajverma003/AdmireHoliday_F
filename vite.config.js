@@ -7,6 +7,11 @@ export default defineConfig(({ command, mode }) => {
 
   return {
     plugins: [react()],
+    
+    server: {
+      host: true,            // allow network access
+      allowedHosts: ['.loca.lt']  // allow any LocalTunnel hostname
+    },
     // Explicitly define the env variables
     define: {
       'process.env.VITE_API_URL': JSON.stringify(env.VITE_API_URL),

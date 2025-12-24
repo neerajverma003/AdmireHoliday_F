@@ -39,13 +39,12 @@
 //         setDestinationsLoading(true);
 //         const response = await getDomesticAndInternationalPage('international');
 //         console.log(response);
-        
-  
+
 //         // Validate response structure
 //         if (!response.data?.success || !Array.isArray(response.data.data)) {
 //           throw new Error('Invalid API response structure');
 //         }
-  
+
 //         // Transform API data - filter for International this time
 //         const formattedDestinations = response.data.data
 //           .filter(dest => dest.domestic_or_international === "International")
@@ -54,11 +53,11 @@
 //             slug: dest.destination_name.toLowerCase().replace(/\s+/g, '-'),
 //             name: dest.destination_name,
 //             description: "Explore this beautiful destination",
-//             images: Array.isArray(dest.title_image) && dest.title_image.length > 0 
-//               ? dest.title_image 
+//             images: Array.isArray(dest.title_image) && dest.title_image.length > 0
+//               ? dest.title_image
 //               : ['default-image-url.jpg'] // Fallback image
 //           }));
-  
+
 //         setDestinations(formattedDestinations);
 //         setError(null);
 //       } catch (error) {
@@ -69,7 +68,7 @@
 //         setDestinationsLoading(false);
 //       }
 //     };
-  
+
 //     fetchInternationalDestinations();
 //   }, []);
 
@@ -106,7 +105,6 @@
 
 // export default International;
 
-
 import React, { useState, useEffect } from "react";
 import NavBar from "../Components/NavBar";
 import Footer from "../Components/Footer";
@@ -115,9 +113,15 @@ import HeroReusable from "../Components/heroSection/HeroReusable";
 import TravelGallery from "../Components/TravelGallery";
 import VideoTestimonials from "../Components/VideoTestimonials";
 import SubscribeUs from "../forms/SubscribeUs";
-import {  getDomesticAndInternationalPage } from "../api/api";
-
-
+import { getDomesticAndInternationalPage } from "../api/api";
+import WhyChoose from "../Components/WhyChoose";
+import TesrmonialSlider from "../Components/TestimonialSlider";
+import ExclusivePackages from "../Components/ExclusivePackages";
+import PopularDestinations from "../Components/PopularDestination";
+import CuratedExperience from "../Components/CuratedExperince";
+import RelatedDestinations from "../Components/RelatedDestination";
+import MeetTeam from "../Components/MeetTeam";
+import StatsAndPartners from '../Components/StatsAndPartners'
 const International = () => {
   const [destinations, setDestinations] = useState([]);
   const [destinationsLoading, setDestinationsLoading] = useState(true);
@@ -128,67 +132,70 @@ const International = () => {
     const fetchInternationalDestinations = async () => {
       try {
         setDestinationsLoading(true);
-        const response = await getDomesticAndInternationalPage('international');
+        const response = await getDomesticAndInternationalPage("international");
         console.log(response);
-        
-  
+
         // Validate response structure
         if (!response.data?.success || !Array.isArray(response.data.data)) {
-          throw new Error('Invalid API response structure');
+          throw new Error("Invalid API response structure");
         }
-  
+
         // Transform API data - filter for International this time
         const formattedDestinations = response.data.data
-          .filter(dest => dest.domestic_or_international === "International")
-          .map(dest => ({
+          .filter((dest) => dest.domestic_or_international === "International")
+          .map((dest) => ({
             id: dest._id,
-            slug: dest.destination_name.toLowerCase().replace(/\s+/g, '-'),
+            slug: dest.destination_name.toLowerCase().replace(/\s+/g, "-"),
             name: dest.destination_name,
             description: "Explore this beautiful destination",
-            images: Array.isArray(dest.title_image) && dest.title_image.length > 0 
-              ? dest.title_image 
-              : ['default-image-url.jpg'] // Fallback image
+            images:
+              Array.isArray(dest.title_image) && dest.title_image.length > 0
+                ? dest.title_image
+                : ["default-image-url.jpg"], // Fallback image
           }));
-  
+
         setDestinations(formattedDestinations);
         setError(null);
       } catch (error) {
-        console.error('Error fetching destinations:', error);
+        console.error("Error fetching destinations:", error);
         setError(error.message);
         setDestinations([]);
       } finally {
         setDestinationsLoading(false);
       }
     };
-  
+
     fetchInternationalDestinations();
   }, []);
 
   return (
     <div>
-      <NavBar />
-      <HeroReusable
+        <NavBar />
+        <HeroReusable
         pageTitle="international"
         heroTitle="Discover International Destinations"
         heroSubtitle="Explore beautiful destinations around the world"
-      />
+        />
+        <ExclusivePackages
+          title="Exclusive Tour Packages"
+          description="Curated packages designed to suit every traveler's needs"
+        />
 
-      <div className="py-12 bg-gray-50">
-        {error ? (
-          <div className="text-center text-red-500">{error}</div>
-        ) : (
-          <DestinationGrid
-            destinations={destinations}
-            title="Popular International Destinations"
-            type="international"
-            loading={destinationsLoading}
-          />
-        )}
-      </div>
 
-      <TravelGallery />
-      <VideoTestimonials />
-      <SubscribeUs />
+
+        <PopularDestinations />
+        <WhyChoose />
+        <CuratedExperience/>
+        <RelatedDestinations/>
+        <TesrmonialSlider />
+
+
+
+
+       
+    
+      
+      
       <Footer />
     </div>
   );

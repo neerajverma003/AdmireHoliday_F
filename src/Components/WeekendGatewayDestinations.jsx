@@ -57,14 +57,22 @@ const WeekendGatewayDestinations = () => {
   return (
     <section className="py-16 bg-white font-['Poppins']">
       {/* Title */}
-      <div className="text-center mb-10">
-        <p className="text-orange-400 font-semibold text-sm">
+      <div className="relative mb-10">
+        <p className="text-center text-xl md:text-2xl font-extrabold text-orange-500">
           Weekend Getaway Destination
         </p>
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+
+        <Link
+          to="/packages/weekend"
+          className="absolute right-0 top-1/2 -translate-y-1/2 text-sm md:text-base font-bold text-orange-500 hover:text-orange-600 transition"
+        >
+          View All →
+        </Link>
+
+        {/* <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
           Handpicked partners for your perfect weekend escape
-        </h2>
-      </div>
+        </h2> */}
+      </div> 
 
       {/* Loader */}
       {loading && (

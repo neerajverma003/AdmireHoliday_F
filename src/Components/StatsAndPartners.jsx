@@ -310,12 +310,10 @@ const HotelPartners = () => {
         
         {/* Heading */}
         <div className="text-center mb-12">
-          <p className="text-orange-500 text-sm font-semibold">
+          <p className="text-center text-xl md:text-2xl font-extrabold text-orange-500">
             Our Hotel Partners
           </p>
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mt-2">
-            Trusted partners offering unique and comfortable stays worldwide
-          </h2>
+          
         </div>
 
         {/* Slider */}

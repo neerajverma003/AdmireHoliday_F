@@ -140,14 +140,204 @@
 // export default HeroReusable;
 
 
+// import React, { useEffect, useState } from "react";
+// import PropTypes from "prop-types";
+// import { motion, AnimatePresence } from "framer-motion";
+// import { getHeroSection } from "../../api/api";
+
+// const HeroReusable = ({ pageTitle, heroTitle, heroSubtitle, videoUrl: propVideoUrl }) => {
+//   const [videoUrl, setVideoUrl] = useState(propVideoUrl || "");
+//   const [loading, setLoading] = useState(!propVideoUrl);
+
+//   // 🔍 SEARCH STATES (SAME AS HERO FILE)
+//   const [showSearch, setShowSearch] = useState(false);
+//   const [productType, setProductType] = useState("Tour");
+//   const [tripDuration, setTripDuration] = useState("3 to 5 days");
+//   const [includeFlight, setIncludeFlight] = useState(true);
+
+//   // 🎥 FETCH HERO VIDEO
+//   useEffect(() => {
+//     if (propVideoUrl) return; // already set by parent
+//     const fetchHeroVideo = async () => {
+//       try {
+//         const res = await getHeroSection(pageTitle);
+//         const url = res?.data?.publicUrl?.[0] || "";
+//         if (url) setVideoUrl(url);
+//       } catch (err) {
+//         console.error("Hero video error:", err);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchHeroVideo();
+//   }, [pageTitle, propVideoUrl]);
+
+//   if (loading) return null;
+
+//   return (
+//     <section className="relative w-full h-[70vh] md:h-[85vh] overflow-hidden">
+//       {/* VIDEO */}
+//       {videoUrl && (
+//         <video
+//           autoPlay
+//           loop
+//           muted
+//           playsInline
+//           className="absolute inset-0 w-full h-full object-cover"
+//         >
+//           <source src={videoUrl} type="video/mp4" />
+//         </video>
+//       )}
+
+//       {/* OVERLAY */}
+//       <div className="absolute inset-0 bg-black/60" />
+
+//       {/* CONTENT */}
+//       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
+//         <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold max-w-5xl">
+//           {heroTitle}
+//         </h1>
+
+//         <p className="mt-4 text-gray-200 max-w-3xl text-sm md:text-lg">
+//           {heroSubtitle}
+//         </p>
+
+//         {/* 🔍 SEARCH INPUT (EXACT SAME AS HERO FILE) */}
+//         <motion.div
+//           layout
+//           whileHover={{ scale: 1.04 }}
+//           whileTap={{ scale: 0.97 }}
+//           transition={{ type: "spring", stiffness: 260, damping: 20 }}
+//           onClick={() => setShowSearch(true)}
+//           className="mt-8 w-full max-w-xl bg-white rounded-full shadow-xl px-6 py-4 flex items-center gap-3 cursor-pointer"
+//         >
+//           <span className="text-gray-400 text-lg">🔍</span>
+//           <span className="text-gray-400">
+//             Search for destinations...
+//           </span>
+//         </motion.div>
+//       </div>
+
+//       {/* 🔍 SEARCH POPUP (SAME AS HERO FILE) */}
+//       <AnimatePresence>
+//         {showSearch && (
+//           <motion.div
+//             className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center px-4"
+//             initial={{ opacity: 0 }}
+//             animate={{ opacity: 1 }}
+//             exit={{ opacity: 0 }}
+//           >
+//             <motion.div
+//               initial={{ y: 80, scale: 0.94, opacity: 0 }}
+//               animate={{ y: 0, scale: 1, opacity: 1 }}
+//               exit={{ y: 80, scale: 0.94, opacity: 0 }}
+//               transition={{ duration: 0.4, ease: "easeOut" }}
+//               className="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden"
+//             >
+//               {/* INPUT */}
+//               <div className="p-4 border-b">
+//                 <input
+//                   autoFocus
+//                   placeholder="Search for Destinations"
+//                   className="w-full border rounded-full px-5 py-3 outline-none"
+//                 />
+//               </div>
+
+//               <div className="p-6 space-y-6">
+//                 {/* PRODUCT TYPE */}
+//                 <div>
+//                   <h4 className="font-semibold mb-3">Product Type</h4>
+//                   <div className="flex gap-3">
+//                     {["Tour", "Activity"].map((type) => (
+//                       <button
+//                         key={type}
+//                         onClick={() => setProductType(type)}
+//                         className={`px-6 py-2 rounded-full border ${
+//                           productType === type
+//                             ? "bg-orange-500 text-white border-orange-500"
+//                             : "text-gray-600"
+//                         }`}
+//                       >
+//                         {type}
+//                       </button>
+//                     ))}
+//                   </div>
+//                 </div>
+
+//                 {/* DURATION */}
+//                 <div>
+//                   <h4 className="font-semibold mb-3">Trip Duration</h4>
+//                   <div className="flex flex-wrap gap-3">
+//                     {[
+//                       "Upto 1 Day",
+//                       "2 to 3 days",
+//                       "3 to 5 days",
+//                       "5 to 7 days",
+//                       "7+ Days",
+//                     ].map((d) => (
+//                       <button
+//                         key={d}
+//                         onClick={() => setTripDuration(d)}
+//                         className={`px-4 py-2 rounded-full border text-sm ${
+//                           tripDuration === d
+//                             ? "bg-orange-500 text-white border-orange-500"
+//                             : "text-gray-600"
+//                         }`}
+//                       >
+//                         {d}
+//                       </button>
+//                     ))}
+//                   </div>
+//                 </div>
+
+//                 {/* FLIGHT */}
+//                 <label className="flex items-center gap-3">
+//                   <input
+//                     type="checkbox"
+//                     checked={includeFlight}
+//                     onChange={() => setIncludeFlight(!includeFlight)}
+//                     className="w-5 h-5 accent-orange-500"
+//                   />
+//                   I want flights to be included
+//                 </label>
+//               </div>
+
+//               {/* FOOTER */}
+//               <div className="flex justify-between items-center p-4 border-t">
+//                 <button
+//                   onClick={() => setShowSearch(false)}
+//                   className="text-gray-600 underline"
+//                 >
+//                   Clear All
+//                 </button>
+//                 <button className="bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold">
+//                   Search For Products
+//                 </button>
+//               </div>
+//             </motion.div>
+//           </motion.div>
+//         )}
+//       </AnimatePresence>
+//     </section>
+//   );
+// };
+
+// HeroReusable.propTypes = {
+//   pageTitle: PropTypes.string.isRequired,
+//   heroTitle: PropTypes.string.isRequired,
+//   heroSubtitle: PropTypes.string,
+// };
+
+// export default HeroReusable;
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { motion, AnimatePresence } from "framer-motion";
 import { getHeroSection } from "../../api/api";
 
-const HeroReusable = ({ pageTitle, heroTitle, heroSubtitle, videoUrl: propVideoUrl }) => {
-  const [videoUrl, setVideoUrl] = useState(propVideoUrl || "");
-  const [loading, setLoading] = useState(!propVideoUrl);
+const HeroReusable = ({ pageTitle, heroTitle, heroSubtitle }) => {
+  const [videoUrl, setVideoUrl] = useState("");
+  const [loading, setLoading] = useState(true);
 
   // 🔍 SEARCH STATES (SAME AS HERO FILE)
   const [showSearch, setShowSearch] = useState(false);
@@ -155,13 +345,12 @@ const HeroReusable = ({ pageTitle, heroTitle, heroSubtitle, videoUrl: propVideoU
   const [tripDuration, setTripDuration] = useState("3 to 5 days");
   const [includeFlight, setIncludeFlight] = useState(true);
 
-  // 🎥 FETCH HERO VIDEO
+  /* ================= FETCH HERO VIDEO ================= */
   useEffect(() => {
-    if (propVideoUrl) return; // already set by parent
     const fetchHeroVideo = async () => {
       try {
         const res = await getHeroSection(pageTitle);
-        const url = res?.data?.publicUrl?.[0] || "";
+        const url = res?.data?.publicUrl?.[0];
         if (url) setVideoUrl(url);
       } catch (err) {
         console.error("Hero video error:", err);
@@ -169,15 +358,14 @@ const HeroReusable = ({ pageTitle, heroTitle, heroSubtitle, videoUrl: propVideoU
         setLoading(false);
       }
     };
-
     fetchHeroVideo();
-  }, [pageTitle, propVideoUrl]);
+  }, [pageTitle]);
 
   if (loading) return null;
 
   return (
-    <section className="relative w-full h-[70vh] md:h-[85vh] overflow-hidden">
-      {/* VIDEO */}
+    <section className="relative w-full h-[75vh] md:h-[90vh] overflow-hidden">
+      {/* 🎥 VIDEO BACKGROUND */}
       {videoUrl && (
         <video
           autoPlay
@@ -190,20 +378,22 @@ const HeroReusable = ({ pageTitle, heroTitle, heroSubtitle, videoUrl: propVideoU
         </video>
       )}
 
-      {/* OVERLAY */}
+      {/* DARK OVERLAY */}
       <div className="absolute inset-0 bg-black/60" />
 
       {/* CONTENT */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
-        <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold max-w-5xl">
+        <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold max-w-5xl">
           {heroTitle}
         </h1>
 
-        <p className="mt-4 text-gray-200 max-w-3xl text-sm md:text-lg">
-          {heroSubtitle}
-        </p>
+        {heroSubtitle && (
+          <p className="mt-4 text-gray-200 max-w-3xl text-sm md:text-lg">
+            {heroSubtitle}
+          </p>
+        )}
 
-        {/* 🔍 SEARCH INPUT (EXACT SAME AS HERO FILE) */}
+        {/* 🔍 SEARCH BAR (CLICK TO OPEN POPUP) */}
         <motion.div
           layout
           whileHover={{ scale: 1.04 }}
@@ -219,7 +409,7 @@ const HeroReusable = ({ pageTitle, heroTitle, heroSubtitle, videoUrl: propVideoU
         </motion.div>
       </div>
 
-      {/* 🔍 SEARCH POPUP (SAME AS HERO FILE) */}
+      {/* ================= SEARCH POPUP (EXACT FROM HERO FILE) ================= */}
       <AnimatePresence>
         {showSearch && (
           <motion.div
@@ -253,7 +443,7 @@ const HeroReusable = ({ pageTitle, heroTitle, heroSubtitle, videoUrl: propVideoU
                       <button
                         key={type}
                         onClick={() => setProductType(type)}
-                        className={`px-6 py-2 rounded-full border ${
+                        className={`px-6 py-2 rounded-full border transition ${
                           productType === type
                             ? "bg-orange-500 text-white border-orange-500"
                             : "text-gray-600"
@@ -265,7 +455,7 @@ const HeroReusable = ({ pageTitle, heroTitle, heroSubtitle, videoUrl: propVideoU
                   </div>
                 </div>
 
-                {/* DURATION */}
+                {/* TRIP DURATION */}
                 <div>
                   <h4 className="font-semibold mb-3">Trip Duration</h4>
                   <div className="flex flex-wrap gap-3">
@@ -279,7 +469,7 @@ const HeroReusable = ({ pageTitle, heroTitle, heroSubtitle, videoUrl: propVideoU
                       <button
                         key={d}
                         onClick={() => setTripDuration(d)}
-                        className={`px-4 py-2 rounded-full border text-sm ${
+                        className={`px-4 py-2 rounded-full border text-sm transition ${
                           tripDuration === d
                             ? "bg-orange-500 text-white border-orange-500"
                             : "text-gray-600"
@@ -291,7 +481,24 @@ const HeroReusable = ({ pageTitle, heroTitle, heroSubtitle, videoUrl: propVideoU
                   </div>
                 </div>
 
-                {/* FLIGHT */}
+                {/* PRICE RANGE */}
+                <div>
+                  <h4 className="font-semibold mb-3">Price Range</h4>
+                  <div className="flex gap-4">
+                    <input
+                      value="INR 0"
+                      readOnly
+                      className="w-1/2 border rounded-lg px-3 py-2"
+                    />
+                    <input
+                      value="INR 500000"
+                      readOnly
+                      className="w-1/2 border rounded-lg px-3 py-2"
+                    />
+                  </div>
+                </div>
+
+                {/* FLIGHTS */}
                 <label className="flex items-center gap-3">
                   <input
                     type="checkbox"

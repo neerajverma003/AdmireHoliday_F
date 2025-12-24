@@ -39,7 +39,9 @@ const NavBar = () => {
         scrolled
           ? "bg-white/80 backdrop-blur-md shadow-md"
           : "bg-transparent"
+          
       }`}
+      
     >
       <div className="max-w-[1400px] mx-auto px-6">
         {/* overflow-visible added */}
